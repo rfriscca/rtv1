@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/09/20 14:51:43 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:39:20 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,73 @@
 # define RTV1_H
 # define WIDTH 640
 # define HEIGHT 480
-# define VIEWPLANEDIST 1
-# define VIEWPLANEWIDTH 0.5
-# define VIEWPLANEHEIGHT 0.35
+# define VPDIST 10.0
+# define VPWIDTH 64.0
+# define VPHEIGHT 48.0
+# define CAMPOSX env->cam.campos.x
+# define CAMPOSY env->cam.campos.y
+# define CAMPOSZ env->cam.campos.z
+# define XINDENT env->cam.xindent
+# define YIDENT env->can.yindent
+# define VPUL env->cam.vpul
 
-typedef struct	s_vector
+# include <math.h>
+# include "mlx.h"
+# include <stdlib.h>
+
+typedef struct		s_vector
 {
-	float		x;
-	float		y;
-	float		z;
-}				t_vector;
+	double			x;
+	double			y;
+	double			z;
+}					t_vector;
 
-typedef struct	s_ray
+typedef struct		s_ray
 {
-	t_vector	origin;
-	t_vector	vecdir;
-	float		dist;
-}				t_ray;
+	t_vector		vecdir;
+	double			dist;
+}					t_ray;
 
-typedef struct	s_camera
+typedef struct		s_camera
 {
-	t_vector	campos;
-	t_ray		ray;
-	float		viewplaneupleft;
-	float		xindent;
-	float		yindent;
-}				t_camera;
+	t_vector		campos;
+	t_ray			ray;
+	t_vector		vecdirx;
+	t_vector		vecdiry;
+	t_vector		vecdirz;
+	t_vector		vpul;
+	double			xindent;
+	double			yindent;
+}					t_camera;
 
-typedef struct	s_mlxdata
+typedef struct		s_obj
 {
-	void		*mlx;
-	void		*img;
-	void		*win;
-	char		*img_data;
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
-}				t_mlxdata;
+	char			type;
+	t_vector		vec1;
+	t_vector		vec2;
+	t_vector		vec3;
+	int				color;
+	struct s_obj	*next;
+}					t_obj;
 
-typedef struct	s_scene
+typedef struct		s_env
 {
-	int			numobjects;
-	char		**description;
-}				t_scene;
+	void			*mlx;
+	void			*img;
+	void			*win;
+	char			*img_data;
+	int				bits_per_pixel;
+	int				size_line;
+	int				endian;
+	double			x;
+	double			y;
+	t_camera		cam;
+}					t_env;
 
-void			raycaster(t_ray ray, t_scene scene);
+void				raycaster(t_env *env);
+t_vector			rotx(t_vector vec, double angle);
+t_vector			roty(t_vector vec, double angle);
+t_vector			rotz(t_vector vec, double angle);
+t_vector			translation(t_vector vec, double x, double y, double z);
 
 #endif
