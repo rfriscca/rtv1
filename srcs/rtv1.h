@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/09/22 15:16:52 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/09/22 16:51:30 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 # define RTV1_H
 # define WIDTH 640
 # define HEIGHT 480
-# define VPDIST 10.0
-# define VPWIDTH 64.0
-# define VPHEIGHT 48.0
+# define FOV 30
+# define VPWIDTH 6.4
+# define VPHEIGHT 4.8
+# define VPDIST 3
 # define CAMPOSX env->cam.campos.x
 # define CAMPOSY env->cam.campos.y
 # define CAMPOSZ env->cam.campos.z
