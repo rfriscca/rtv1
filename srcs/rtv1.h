@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/09/22 14:39:20 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/09/22 15:16:52 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,18 @@
 # define CAMPOSY env->cam.campos.y
 # define CAMPOSZ env->cam.campos.z
 # define XINDENT env->cam.xindent
-# define YIDENT env->can.yindent
+# define YINDENT env->cam.yindent
 # define VPUL env->cam.vpul
+# define VDIRX env->cam.ray.vecdir.x
+# define VDIRY env->cam.ray.vecdir.y
+# define VDIRZ env->cam.ray.vecdir.z
 
 # include <math.h>
 # include "mlx.h"
 # include <stdlib.h>
+
+// delete it later
+# include <stdio.h>
 
 typedef struct		s_vector
 {
@@ -78,6 +84,7 @@ typedef struct		s_env
 }					t_env;
 
 void				raycaster(t_env *env);
+void				mlx_pixel_put_img(t_env *env, int color);
 t_vector			rotx(t_vector vec, double angle);
 t_vector			roty(t_vector vec, double angle);
 t_vector			rotz(t_vector vec, double angle);
