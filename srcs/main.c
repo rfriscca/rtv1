@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:52:19 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/09/26 15:38:36 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/09/26 16:28:15 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int			main(int argc, char **argv)
 
 	env = (t_env*)malloc(sizeof(t_env));
 	env->obj = NULL;
+	env->rotx = 0;
 	create_obj(env, 0, 0, 0, 0x00ff00);
 	create_obj(env, 3, 0, 3, 0xff0000);
 	create_obj(env, 0, 0, -3, 0x0000ff);
@@ -80,8 +81,11 @@ int			main(int argc, char **argv)
 	env->img = mlx_new_image(env->mlx, WIDTH, HEIGHT);
 	env->img_data = mlx_get_data_addr(env->img, &env->bits_per_pixel,
 			&env->size_line, &env->endian);
-	env->cam = init_cam(0, 0, -30, 90);
+	env->cam = init_cam(0, 0, -30, env->rotx);
 	raycaster(env);
+	env->win = mlx_new_window(env->mlx, WIDTH, HEIGHT, "RTv1");
+	mlx_key_hook(env->win, event, env);
+	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 	mlx_loop(env->mlx);
 	return (0);
 }

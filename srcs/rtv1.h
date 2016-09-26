@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/09/26 15:41:47 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/09/26 16:27:10 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@
 # define D1 env->obj->d1
 # define D2 env->obj->d2
 
-// define vec dir camera
+/*
+**  define vec dir camera
+*/
 
 # define VDZX cam.vecdirz.x
 # define VDZY cam.vecdirz.y
@@ -59,9 +61,6 @@
 # include "mlx.h"
 # include <stdlib.h>
 # include <unistd.h>
-
-// delete it later
-# include <stdio.h>
 
 typedef struct		s_vector
 {
@@ -94,7 +93,6 @@ typedef struct		s_obj
 	char			type;
 	t_vector		vec1;
 	t_vector		vec2;
-	t_vector		vec3;
 	double			r;
 	double			d1;
 	double			d2;
@@ -114,16 +112,20 @@ typedef struct		s_env
 	int				endian;
 	double			x;
 	double			y;
+	double			rotx;
 	t_obj			*obj;
 	t_camera		cam;
 }					t_env;
 
 void				raycaster(t_env *env);
 void				mlx_pixel_put_img(t_env *env, int color);
+t_camera			init_cam(double x, double y, double z, double rotax);
 t_vector			rotx(t_vector vec, double angle);
 t_vector			roty(t_vector vec, double angle);
 t_vector			rotz(t_vector vec, double angle);
 t_vector			translation(t_vector vec, double x, double y, double z);
+
+int					event(int n, t_env *env);
 
 void				test_obj(t_env *env);
 
