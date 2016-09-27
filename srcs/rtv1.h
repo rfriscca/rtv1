@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/09/27 12:37:47 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/09/27 15:05:49 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,13 @@ typedef struct		s_vector
 	double			z;
 }					t_vector;
 
+typedef struct		s_color
+{
+	char			r;
+	char			g;
+	char			b;
+}					t_color;
+
 typedef struct		s_ray
 {
 	t_vector		vecdir;
@@ -88,6 +95,14 @@ typedef struct		s_camera
 	double			yindent;
 }					t_camera;
 
+typedef struct		s_spot
+{
+	t_vector		spotpos;
+	t_color			color;
+	struct s_spot	*first;
+	struct s_spot	*next;
+}					t_spot;
+
 typedef struct		s_obj
 {
 	char			type;
@@ -96,7 +111,7 @@ typedef struct		s_obj
 	double			r;
 	double			d1;
 	double			d2;
-	int				color;
+	t_color			color;
 	struct s_obj	*next;
 	struct s_obj	*first;
 }					t_obj;
@@ -115,16 +130,23 @@ typedef struct		s_env
 	double			rotx;
 	t_obj			*obj;
 	t_camera		cam;
+	t_spot			*spot;
 }					t_env;
 
 void				raycaster(t_env *env);
 void				mlx_pixel_put_img(t_env *env, int color);
+t_ray				init_ray(t_env *env);
+int					event(int n, t_env *env);
+
+/*
+** VECTOR FUNCTIONS
+*/
+
 t_vector			rotx(t_vector vec, double angle);
 t_vector			roty(t_vector vec, double angle);
 t_vector			rotz(t_vector vec, double angle);
 t_vector			translation(t_vector vec, double x, double y, double z);
-
-int					event(int n, t_env *env);
+t_vector			normalize_vec(t_vector vec);
 
 /*
 ** CAMERA FUNCTIONS
@@ -133,6 +155,13 @@ int					event(int n, t_env *env);
 t_camera			init_cam(double x, double y, double z);
 void				rotcam(t_env *env, double rx, double ry, double rz);
 void				camangle(t_env *env, double rx, double ry, double rz);
+
+
+/*
+** OBJECTS FUNCTIONS
+*/
+
+void				create_spot(t_env *env, t_vector pos, t_color color);
 
 
 void				test_obj(t_env *env);

@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 12:24:29 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/09/26 15:54:44 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/09/27 15:05:34 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,10 @@ void	test_sphere(t_env *env)
 	det = b * b - 4 * a * c;
 	if (det >= 0)
 	{
-		if ((D1 = (-b + sqrt(det)) / (2 * a)) > 0 && D1 < RDIST)
-		{
+		if (D1 < RDIST && (D1 = (-b + sqrt(det)) / (2 * a)) > 0)
 			RDIST = D1;
-			RCOLOR = OBJCOLOR;
-		}
-		if ((D2 = (-b - sqrt(det)) / (2 * a)) > 0 && D2 < RDIST)
-		{
+		if (D2 < RDIST && (D2 = (-b - sqrt(det)) / (2 * a)) > 0)
 			RDIST = D2;
-			RCOLOR = OBJCOLOR;
-		}
 	}
 }
 
