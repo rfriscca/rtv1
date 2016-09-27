@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/09/27 15:05:49 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/09/27 16:42:58 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define VDIRY env->cam.ray.vecdir.y
 # define VDIRZ env->cam.ray.vecdir.z
 # define RDIST env->cam.ray.dist
+# define OBJTOUCHED env->cam.ray.objtouched
 # define RCOLOR env->cam.ray.color
 # define OBJCOLOR env->obj->color
 # define XS env->obj->vec1.x
@@ -76,9 +77,23 @@ typedef struct		s_color
 	char			b;
 }					t_color;
 
+typedef struct		s_obj
+{
+	char			type;
+	t_vector		vec1;
+	t_vector		vec2;
+	double			r;
+	double			d1;
+	double			d2;
+	t_color			color;
+	struct s_obj	*next;
+	struct s_obj	*first;
+}					t_obj;
+
 typedef struct		s_ray
 {
 	t_vector		vecdir;
+	t_obj			*objtouched;
 	double			dist;
 	int				color;
 }					t_ray;
@@ -103,19 +118,6 @@ typedef struct		s_spot
 	struct s_spot	*next;
 }					t_spot;
 
-typedef struct		s_obj
-{
-	char			type;
-	t_vector		vec1;
-	t_vector		vec2;
-	double			r;
-	double			d1;
-	double			d2;
-	t_color			color;
-	struct s_obj	*next;
-	struct s_obj	*first;
-}					t_obj;
-
 typedef struct		s_env
 {
 	void			*mlx;
@@ -136,6 +138,8 @@ typedef struct		s_env
 void				raycaster(t_env *env);
 void				mlx_pixel_put_img(t_env *env, int color);
 t_ray				init_ray(t_env *env);
+int					calc_color(t_color cobj, t_color clight, double angle);
+t_color				extract_color(int color);
 int					event(int n, t_env *env);
 
 /*
@@ -147,6 +151,10 @@ t_vector			roty(t_vector vec, double angle);
 t_vector			rotz(t_vector vec, double angle);
 t_vector			translation(t_vector vec, double x, double y, double z);
 t_vector			normalize_vec(t_vector vec);
+t_vector			calc_vect(t_vector p1, t_vector p2);
+t_vector			ray_point(t_env *env);
+double				dotproduct(t_vector vec1, t_vector vec2);
+
 
 /*
 ** CAMERA FUNCTIONS
@@ -162,7 +170,7 @@ void				camangle(t_env *env, double rx, double ry, double rz);
 */
 
 void				create_spot(t_env *env, t_vector pos, t_color color);
-
+void				test_spot(t_env *env);
 
 void				test_obj(t_env *env);
 

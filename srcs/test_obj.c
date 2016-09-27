@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 12:24:29 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/09/27 15:05:34 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/09/27 16:05:33 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,15 @@ void	test_sphere(t_env *env)
 	if (det >= 0)
 	{
 		if (D1 < RDIST && (D1 = (-b + sqrt(det)) / (2 * a)) > 0)
+		{
 			RDIST = D1;
+			OBJTOUCHED = env->obj;
+		}
 		if (D2 < RDIST && (D2 = (-b - sqrt(det)) / (2 * a)) > 0)
+		{
 			RDIST = D2;
+			OBJTOUCHED = env->obj;
+		}
 	}
 }
 
