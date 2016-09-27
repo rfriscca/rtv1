@@ -6,39 +6,11 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:52:19 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/09/26 16:28:15 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/09/27 12:34:51 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-t_camera	init_cam(double x, double y, double z, double rotax)
-{
-	t_camera	cam;
-
-	cam.campos.x = x;
-	cam.campos.y = y;
-	cam.campos.z = z;
-	cam.campos = rotx(cam.campos, rotax);
-	cam.vecdirx.x = 1;
-	cam.vecdirx.y = 0;
-	cam.vecdirx.z = 0;
-	cam.vecdiry.x = 0;
-	cam.vecdiry.y = 1;
-	cam.vecdiry.z = 0;
-	cam.vecdirz.x = 0;
-	cam.vecdirz.y = 0;
-	cam.vecdirz.z = 1;
-	cam.vecdirx = rotx(cam.vecdirx, rotax);
-	cam.vecdiry = rotx(cam.vecdiry, rotax);
-	cam.vecdirz = rotx(cam.vecdirz, rotax);
-	cam.vpul.x = cam.campos.x + VDZX * VPDIST + VDXX * VPHEIGHT / 2.0 - VDYX * VPWIDTH / 2.0;
-	cam.vpul.y = cam.campos.y + VDZY * VPDIST + VDXY * VPHEIGHT / 2.0 - VDYY * VPWIDTH / 2.0;
-	cam.vpul.z = cam.campos.z + VDZZ * VPDIST + VDXZ * VPHEIGHT / 2.0 - VDYZ * VPWIDTH / 2.0;
-	cam.xindent = VPHEIGHT / (double)HEIGHT;
-	cam.yindent = VPWIDTH / (double)WIDTH;
-	return (cam);
-}
 
 void		create_obj(t_env *env, double x, double y, double z, int color)
 {
@@ -81,7 +53,7 @@ int			main(int argc, char **argv)
 	env->img = mlx_new_image(env->mlx, WIDTH, HEIGHT);
 	env->img_data = mlx_get_data_addr(env->img, &env->bits_per_pixel,
 			&env->size_line, &env->endian);
-	env->cam = init_cam(0, 0, -30, env->rotx);
+	env->cam = init_cam(0, 0, -30);
 	raycaster(env);
 	env->win = mlx_new_window(env->mlx, WIDTH, HEIGHT, "RTv1");
 	mlx_key_hook(env->win, event, env);

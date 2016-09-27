@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:22:46 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/09/26 16:29:08 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/09/27 13:15:47 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,17 @@ int		event(int n, t_env *env)
 		exit(1);
 	else if (n == 124)
 	{
-		env->rotx += 0.1;
-		env->cam = init_cam(0, 0, -30, env->rotx);
+		env->rotx = 0.1;
+		rotcam(env, env->rotx, 0, 0);
+		camangle(env, env->rotx, 0, 0);
 		raycaster(env);
 		mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 	}
 	else if (n == 123)
 	{
-		env->rotx -= 0.1;
-		env->cam = init_cam(0, 0, -30, env->rotx);
+		env->rotx = -0.1;
+		rotcam(env, env->rotx, 0, 0);
+		camangle(env, env->rotx, 0, 0);
 		raycaster(env);
 		mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 	}

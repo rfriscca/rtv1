@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/09/26 16:27:10 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/09/27 12:37:47 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,13 +119,21 @@ typedef struct		s_env
 
 void				raycaster(t_env *env);
 void				mlx_pixel_put_img(t_env *env, int color);
-t_camera			init_cam(double x, double y, double z, double rotax);
 t_vector			rotx(t_vector vec, double angle);
 t_vector			roty(t_vector vec, double angle);
 t_vector			rotz(t_vector vec, double angle);
 t_vector			translation(t_vector vec, double x, double y, double z);
 
 int					event(int n, t_env *env);
+
+/*
+** CAMERA FUNCTIONS
+*/
+
+t_camera			init_cam(double x, double y, double z);
+void				rotcam(t_env *env, double rx, double ry, double rz);
+void				camangle(t_env *env, double rx, double ry, double rz);
+
 
 void				test_obj(t_env *env);
 
