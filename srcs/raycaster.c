@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:22:46 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/09/27 16:56:18 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/09/28 15:38:52 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ t_ray	init_ray(t_env *env)
 	ray.vecdir.y = y / sqrt(x * x + y * y + z * z);
 	ray.vecdir.z = z / sqrt(x * x + y * y + z * z);
 	ray.dist = 1000000;
-	ray.color = 0;
+	ray.color.r = 0;
+	ray.color.g = 0;
+	ray.color.b = 0;
 	ray.objtouched = NULL;
 	return (ray);
 }

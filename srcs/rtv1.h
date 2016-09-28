@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/09/27 16:42:58 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/09/28 15:40:13 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ typedef struct		s_vector
 
 typedef struct		s_color
 {
-	char			r;
-	char			g;
-	char			b;
+	double			r;
+	double			g;
+	double			b;
 }					t_color;
 
 typedef struct		s_obj
@@ -95,7 +95,7 @@ typedef struct		s_ray
 	t_vector		vecdir;
 	t_obj			*objtouched;
 	double			dist;
-	int				color;
+	t_color			color;
 }					t_ray;
 
 typedef struct		s_camera
@@ -136,9 +136,9 @@ typedef struct		s_env
 }					t_env;
 
 void				raycaster(t_env *env);
-void				mlx_pixel_put_img(t_env *env, int color);
+void				mlx_pixel_put_img(t_env *env, t_color color);
 t_ray				init_ray(t_env *env);
-int					calc_color(t_color cobj, t_color clight, double angle);
+t_color				calc_color(t_color cobj, t_color clight, double angle);
 t_color				extract_color(int color);
 int					event(int n, t_env *env);
 
