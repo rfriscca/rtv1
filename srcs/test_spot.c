@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 15:15:57 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/03 12:59:10 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/03 13:21:02 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,16 @@ void	test_spot2(t_env *env)
 {
 	t_vector	point;
 	t_vector	vec_ltoo;
+	t_vector	vec_otol;
 	t_vector	vec_ctoo;
 	double		angle;
 
 	point = ray_point(env);
 	vec_ctoo = normalize_vec(calc_vect(point, OBJTOUCHED->vec1));
 	vec_ltoo = normalize_vec(calc_vect(env->spot->spotpos, point));
+	vec_otol = normalize_vec(calc_vect(point, env->spot->spotpos));
 	angle = dotproduct(vec_ltoo, vec_ctoo);
-	init_lightray(env, vec_ltoo);
+	init_lightray(env, vec_otol);
 	if (lightcaster(env, point, env->spot->ray, env->obj) == 0)
 		RCOLOR = calc_color(OBJTOUCHED->color, env->spot->color, angle);
 	else
