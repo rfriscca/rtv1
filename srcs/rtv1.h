@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/09/28 15:40:13 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/03 12:59:46 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define VPWIDTH 6.4
 # define VPHEIGHT 4.8
 # define VPDIST 12
+# define PI 3.14159265
 
 /*
 ** FOV = atan(VPWIDTH / 2 / VPDIST)
@@ -62,6 +63,9 @@
 # include "mlx.h"
 # include <stdlib.h>
 # include <unistd.h>
+
+//test
+# include <stdio.h>
 
 typedef struct		s_vector
 {
@@ -114,6 +118,7 @@ typedef struct		s_spot
 {
 	t_vector		spotpos;
 	t_color			color;
+	t_ray			ray;
 	struct s_spot	*first;
 	struct s_spot	*next;
 }					t_spot;
@@ -139,6 +144,7 @@ void				raycaster(t_env *env);
 void				mlx_pixel_put_img(t_env *env, t_color color);
 t_ray				init_ray(t_env *env);
 t_color				calc_color(t_color cobj, t_color clight, double angle);
+t_color				calc_shadow(t_color cobj, t_color clight);
 t_color				extract_color(int color);
 int					event(int n, t_env *env);
 
@@ -171,6 +177,8 @@ void				camangle(t_env *env, double rx, double ry, double rz);
 
 void				create_spot(t_env *env, t_vector pos, t_color color);
 void				test_spot(t_env *env);
+int					test_sphere2(t_env *env, t_vector pos, t_ray ray);
+
 
 void				test_obj(t_env *env);
 

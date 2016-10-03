@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 12:24:29 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/09/27 16:05:33 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/03 12:48:49 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,35 @@ void	test_sphere(t_env *env)
 			OBJTOUCHED = env->obj;
 		}
 	}
+}
+
+int		test_sphere2(t_env *env, t_vector pos, t_ray ray)
+{
+	double	a;
+	double	b;
+	double	c;
+	double	det;
+
+	a = pow(ray.vecdir.x, 2) + pow(ray.vecdir.y, 2) + pow(ray.vecdir.z, 2);
+	b = 2 * (ray.vecdir.x * (pos.x - XS) + ray.vecdir.y * (pos.y - YS) +
+			ray.vecdir.z * (pos.z - ZS));
+	c = pow(pos.x - XS, 2) + pow(pos.y - YS, 2) + pow(pos.z - ZS, 2)
+		- RS * RS;
+	det = b * b - 4 * a * c;
+	if (det >= 0)
+	{
+		if (D1 < RDIST && (D1 = (-b + sqrt(det)) / (2 * a)) > 0)
+		{
+			ray.dist = D1;
+			ray.objtouched = env->obj;
+		}
+		if (D2 < RDIST && (D2 = (-b - sqrt(det)) / (2 * a)) > 0)
+		{
+			ray.dist = D2;
+			ray.objtouched = env->obj;
+		}
+	}
+	return (ray.dist);
 }
 
 void	test_obj(t_env *env)

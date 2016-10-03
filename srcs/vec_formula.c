@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 14:06:46 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/09/27 16:13:16 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/03 12:48:20 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ t_vector	ray_point(t_env *env)
 {
 	t_vector	point;
 
-	point.x = VDIRX * RDIST - CAMPOSX;
-	point.y = VDIRY * RDIST - CAMPOSY;
-	point.z = VDIRZ * RDIST - CAMPOSZ;
+	point.x = VDIRX * RDIST + CAMPOSX;
+	point.y = VDIRY * RDIST + CAMPOSY;
+	point.z = VDIRZ * RDIST + CAMPOSZ;
 	return (point);
 }
 
