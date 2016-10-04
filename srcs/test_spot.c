@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 15:15:57 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/04 12:12:03 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/04 13:40:24 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ int		lightcaster(t_env *env, t_vector pos, t_ray ray, t_obj *obj)
 	env->obj = env->obj->first;
 	while (env->obj->next)
 	{
-		if (test_sphere2(env, pos, ray) < 1000000)
+		if (test_sphere2(env, pos, ray) == 1)
 		{
 			env->obj = obj;
 			return (1);
 		}
 		env->obj = env->obj->next;
 	}
-	if (test_sphere2(env, pos, ray) < 1000000)
+	if (test_sphere2(env, pos, ray) == 1)
 	{
 		env->obj = obj;
 		return (1);
@@ -33,11 +33,15 @@ int		lightcaster(t_env *env, t_vector pos, t_ray ray, t_obj *obj)
 	return (0);
 }
 
-void	init_lightray(t_env *env, t_vector vec)
+t_ray	init_lightray(t_env *env, t_vector vec, t_vector point)
 {
-	env->spot->ray.vecdir = vec;
-	env->spot->ray.dist = 1000000;
-	env->spot->ray.objtouched = NULL;
+	t_vector	len;
+	t_ray		ray;
+
+	len = calc_vect(point, env->spot->spotpos);
+	ray.vecdir = vec;
+	ray.dist = sqrt(len.x * len.x + len.y * len.y + len.z * len.z);
+	return (ray);
 }
 
 void	test_spot2(t_env *env)
@@ -53,7 +57,7 @@ void	test_spot2(t_env *env)
 	vec_ltoo = normalize_vec(calc_vect(env->spot->spotpos, point));
 	vec_otol = normalize_vec(calc_vect(point, env->spot->spotpos));
 	angle = dotproduct(vec_otol, vec_ctoo);
-	init_lightray(env, vec_otol);
+	env->spot->ray = init_lightray(env, vec_otol, point);
 	if (lightcaster(env, point, env->spot->ray, env->obj) == 0)
 		RCOLOR = calc_color(OBJTOUCHED->color, env->spot->color, angle);
 	else

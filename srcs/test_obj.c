@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 12:24:29 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/03 12:48:49 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/04 13:39:05 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void	test_sphere(t_env *env)
 	det = b * b - 4 * a * c;
 	if (det >= 0)
 	{
-		if (D1 < RDIST && (D1 = (-b + sqrt(det)) / (2 * a)) > 0)
+		if ((D1 = (-b + sqrt(det)) / (2 * a)) > 0 && D1 < RDIST)
 		{
 			RDIST = D1;
 			OBJTOUCHED = env->obj;
 		}
-		if (D2 < RDIST && (D2 = (-b - sqrt(det)) / (2 * a)) > 0)
+		if ((D2 = (-b - sqrt(det)) / (2 * a)) > 0 && D2 < RDIST)
 		{
 			RDIST = D2;
 			OBJTOUCHED = env->obj;
@@ -55,18 +55,16 @@ int		test_sphere2(t_env *env, t_vector pos, t_ray ray)
 	det = b * b - 4 * a * c;
 	if (det >= 0)
 	{
-		if (D1 < RDIST && (D1 = (-b + sqrt(det)) / (2 * a)) > 0)
+		if ((D1 = (-b + sqrt(det)) / (2 * a)) > 0.1 && D1 < ray.dist)
 		{
-			ray.dist = D1;
-			ray.objtouched = env->obj;
+			return (1);
 		}
-		if (D2 < RDIST && (D2 = (-b - sqrt(det)) / (2 * a)) > 0)
+		if ((D2 = (-b - sqrt(det)) / (2 * a)) > 0.1 && D2 < ray.dist)
 		{
-			ray.dist = D2;
-			ray.objtouched = env->obj;
+			return (1);
 		}
 	}
-	return (ray.dist);
+	return (0);
 }
 
 void	test_obj(t_env *env)

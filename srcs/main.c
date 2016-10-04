@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:52:19 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/03 13:22:07 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/04 12:30:49 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void		create_obj(t_env *env, double x, double y, double z, t_color color)
 	obj->vec1.y = y;
 	obj->vec1.z = z;
 	obj->r = 2;
+	obj->d1 = 0;
+	obj->d2 = 0;
 	obj->color = color;
 	if (env->obj == NULL)
 	{
