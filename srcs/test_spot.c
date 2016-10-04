@@ -6,25 +6,36 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 15:15:57 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/04 14:07:13 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/04 15:44:43 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+int		lightcaster2(t_env *env, t_vector pos, t_ray ray)
+{
+	if (env->obj->type == 's')
+		if (test_sphere2(env, pos, ray) == 1)
+			return (1);
+	if (env->obj->type == 'p')
+		if (test_plan2(env, pos, ray) == 1)
+			return (1);
+	return (0);
+}
 
 int		lightcaster(t_env *env, t_vector pos, t_ray ray, t_obj *obj)
 {
 	env->obj = env->obj->first;
 	while (env->obj->next)
 	{
-		if (test_sphere2(env, pos, ray) == 1)
+		if (lightcaster2(env, pos, ray) == 1)
 		{
 			env->obj = obj;
 			return (1);
 		}
 		env->obj = env->obj->next;
 	}
-	if (test_sphere2(env, pos, ray) == 1)
+	if (lightcaster2(env, pos, ray) == 1)
 	{
 		env->obj = obj;
 		return (1);
@@ -53,7 +64,10 @@ void	test_spot2(t_env *env)
 	double		angle;
 
 	point = ray_point(env);
-	vec_ctoo = normalize_vec(calc_vect(OBJTOUCHED->vec1, point));
+	if (OBJTOUCHED->type == 's')
+		vec_ctoo = normalize_vec(calc_vect(OBJTOUCHED->vec1, point));
+	else if (OBJTOUCHED->type == 'p')
+		vec_ctoo = OBJTOUCHED->vec2;
 	vec_ltoo = normalize_vec(calc_vect(env->spot->spotpos, point));
 	vec_otol = normalize_vec(calc_vect(point, env->spot->spotpos));
 	angle = dotproduct(vec_otol, vec_ctoo);

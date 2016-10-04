@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 12:24:29 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/04 13:39:05 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/04 15:27:09 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,13 @@ void	test_obj(t_env *env)
 	{
 		if (env->obj->type == 's')
 			test_sphere(env);
+		else if (env->obj->type == 'p')
+			test_plan(env);
 		env->obj = env->obj->next;
 	}
-	test_sphere(env);
+	if (env->obj->type == 's')
+		test_sphere(env);
+	else if (env->obj->type == 'p')
+		test_plan(env);
 	env->obj = env->obj->first;
 }

@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/04 14:07:08 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/04 15:27:36 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@
 # define XS env->obj->vec1.x
 # define YS env->obj->vec1.y
 # define ZS env->obj->vec1.z
+# define NX env->obj->vec2.x
+# define NY env->obj->vec2.y
+# define NZ env->obj->vec2.z
 # define RS env->obj->r
 # define D1 env->obj->d1
 # define D2 env->obj->d2
@@ -178,6 +181,9 @@ void				camangle(t_env *env, double rx, double ry, double rz);
 void				create_spot(t_env *env, t_vector pos, t_color color);
 void				test_spot(t_env *env);
 int					test_sphere2(t_env *env, t_vector pos, t_ray ray);
+void				create_plan(t_env *env, t_vector pos, t_color color);
+void				test_plan(t_env *env);
+int					test_plan2(t_env *env, t_vector pos, t_ray ray);
 
 
 void				test_obj(t_env *env);
