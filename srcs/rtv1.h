@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/04 13:39:23 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/04 14:07:08 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,8 @@ typedef struct		s_env
 void				raycaster(t_env *env);
 void				mlx_pixel_put_img(t_env *env, t_color color);
 t_ray				init_ray(t_env *env);
-t_color				calc_color(t_color cobj, t_color clight, double angle);
-t_color				calc_shadow(t_color cobj, t_color clight);
+t_color				calc_color(t_env *env, t_color cobj, t_color clight, double angle);
+t_color				calc_shadow(t_env *env, t_color cobj, t_color clight);
 t_color				extract_color(int color);
 int					event(int n, t_env *env);
 

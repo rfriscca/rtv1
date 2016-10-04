@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 15:15:57 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/04 13:40:24 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/04 14:07:13 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ void	test_spot2(t_env *env)
 	angle = dotproduct(vec_otol, vec_ctoo);
 	env->spot->ray = init_lightray(env, vec_otol, point);
 	if (lightcaster(env, point, env->spot->ray, env->obj) == 0)
-		RCOLOR = calc_color(OBJTOUCHED->color, env->spot->color, angle);
+		RCOLOR = calc_color(env, OBJTOUCHED->color, env->spot->color, angle);
 	else
-		RCOLOR = calc_shadow(OBJTOUCHED->color, env->spot->color);
+		RCOLOR = calc_shadow(env, OBJTOUCHED->color, env->spot->color);
 
 }
 

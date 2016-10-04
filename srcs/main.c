@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:52:19 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/04 12:30:49 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/04 14:19:24 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,13 @@ void		create_obj(t_env *env, double x, double y, double z, t_color color)
 	env->obj = env->obj->first;
 }
 
-void		init_spot(t_env *env, double x, double y, double z)
+void		init_spot(t_env *env, double x, double y, double z, t_color color)
 {
 	t_vector	pos;
-	t_color		color;
 
 	pos.x = x;
 	pos.y = y;
 	pos.z = z;
-	color.r = 255;
-	color.b = 255;
-	color.g = 255;
 	create_spot(env, pos, color);
 }
 
@@ -63,19 +59,23 @@ int			main(int argc, char **argv)
 	env = (t_env*)malloc(sizeof(t_env));
 	env->obj = NULL;
 	env->spot = NULL;
-	color.r = 1; color.g = 0; color.b = 0;
+	color.r = 1; color.g = 1; color.b = 1;
 	create_obj(env, 0, 0, 0, color);
-	color.r = 0; color.g = 1; color.b = 0;
-	create_obj(env, 5, 0, 0, color);
-	color.r = 0; color.g = 0; color.b = 1;
+	color.r = 1; color.g = 1; color.b = 1;
+	create_obj(env, 0, 5, 0, color);
+	color.r = 1; color.g = 1; color.b = 1;
 	create_obj(env, 0, -5, 0, color);
 	env->mlx = mlx_init();
 	env->img = mlx_new_image(env->mlx, WIDTH, HEIGHT);
 	env->img_data = mlx_get_data_addr(env->img, &env->bits_per_pixel,
 			&env->size_line, &env->endian);
 	env->cam = init_cam(0, 0, -30);
-	init_spot(env, 20, 0, 0);
-	//init_spot(env, 0, -10, 0);
+	color.r = 255; color.g = 0; color.b = 0;
+	init_spot(env, 20, 5, 0, color);
+	color.r = 0; color.g = 0; color.b = 255;
+	init_spot(env, 20, -5, 0, color);
+	color.r = 255; color.g = 255; color.b = 255;
+	init_spot(env, -20, 0, 0, color);
 	raycaster(env);
 	env->win = mlx_new_window(env->mlx, WIDTH, HEIGHT, "RTv1");
 	mlx_key_hook(env->win, event, env);

@@ -6,23 +6,29 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 16:13:22 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/04 13:13:12 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/04 14:09:09 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_color		calc_shadow(t_color cobj, t_color clight)
+t_color		calc_shadow(t_env *env, t_color cobj, t_color clight)
 {
 	t_color		color;
 
 	color.r = (cobj.r * clight.r) * 0.15;
 	color.g = (cobj.g * clight.g) * 0.15;
 	color.b = (cobj.b * clight.b) * 0.15;
+	if (color.r < RCOLOR.r)
+		color.r = RCOLOR.r;
+	if (color.g < RCOLOR.g)
+		color.g = RCOLOR.g;
+	if (color.b < RCOLOR.b)
+		color.b = RCOLOR.b;
 	return (color);
 }
 
-t_color		calc_color(t_color cobj, t_color clight, double angle)
+t_color		calc_color(t_env *env, t_color cobj, t_color clight, double angle)
 {
 	t_color		color;
 
@@ -33,6 +39,12 @@ t_color		calc_color(t_color cobj, t_color clight, double angle)
 		color.b = (cobj.b * clight.b * angle);
 	}
 	else
-		color = calc_shadow(cobj, clight);
+		color = calc_shadow(env, cobj, clight);
+	if (color.r < RCOLOR.r)
+		color.r = RCOLOR.r;
+	if (color.g < RCOLOR.g)
+		color.g = RCOLOR.g;
+	if (color.b < RCOLOR.b)
+		color.b = RCOLOR.b;
 	return (color);
 }
