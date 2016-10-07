@@ -6,11 +6,11 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 12:28:58 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/01/28 12:22:22 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/07 15:51:17 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 t_buf	ft_realloc(int const fd, t_buf buf)
 {
@@ -18,9 +18,9 @@ t_buf	ft_realloc(int const fd, t_buf buf)
 	{
 		buf.i = 0;
 		if (!buf.buf)
-			if ((buf.buf = (char*)malloc(sizeof(*buf.buf) * BUFF_SIZE)) == NULL)
+			if ((buf.buf = (char*)malloc(sizeof(*buf.buf) * BUF_SIZE)) == NULL)
 				buf.i = -1;
-		if ((buf.size = read(fd, buf.buf, BUFF_SIZE)) == -1)
+		if ((buf.size = read(fd, buf.buf, BUF_SIZE)) == -1)
 			buf.i = -1;
 	}
 	return (buf);
@@ -32,14 +32,13 @@ int		read_line(char **line, t_buf buf)
 	char	*save;
 
 	i = 0;
-	if ((save = ft_strnew(BUFF_SIZE)) == NULL)
+	if ((save = ft_strnew(BUF_SIZE)) == NULL)
 		return (-1);
 	while (buf.i < buf.size)
 	{
 		if (buf.buf[buf.i] == '\n')
 		{
-			*line = ft_strjoin(*line, save);
-			free(save);
+			*line = ft_strjoingnl(*line, save);
 			return (buf.i);
 		}
 		save[i] = buf.buf[buf.i];
@@ -47,8 +46,7 @@ int		read_line(char **line, t_buf buf)
 		++buf.i;
 		if (buf.i == buf.size)
 		{
-			*line = ft_strjoin(*line, save);
-			free(save);
+			*line = ft_strjoingnl(*line, save);
 			return (buf.i);
 		}
 	}

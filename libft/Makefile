@@ -6,7 +6,7 @@
 #    By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/04 12:28:48 by rfriscca          #+#    #+#              #
-#    Updated: 2016/04/14 12:58:22 by rfriscca         ###   ########.fr        #
+#    Updated: 2016/10/07 15:50:53 by rfriscca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,22 +77,20 @@ SRC  = \
 	   ft_newnode.c \
 	   ft_delnode.c \
 	   ft_deltree.c \
-	   ft_power.c \
-	   ft_abs.c \
-	   get_next_line.c
+	   ft_strjoingnl.c \
+	   get_next_line.c \
+	   ft_power.c
 
 OBJ  = $(SRC:.c=.o)
 
 FLAGS = -Wall -Werror -Wextra
 
-$(NAME) : $(OBJ)
+$(NAME) :
+	gcc $(FLAGS) -c $(SRC)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
 all : $(NAME)
-
-%.o : %.c
-	gcc $(FLAGS) -c $<
 
 clean :
 	rm -f $(OBJ)

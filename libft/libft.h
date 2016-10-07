@@ -6,17 +6,31 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 16:14:57 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/01/29 16:28:53 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/07 15:52:24 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# define BUF_SIZE 8
+
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <sys/types.h>
+# include <sys/uio.h>
 
+typedef struct		s_buf
+{
+	char			*buf;
+	int				fd;
+	int				i;
+	int				size;
+}					t_buf;
+
+int					get_next_line(const int fd, char **line);
+char				*ft_strjoingnl(char *s1, char *s2);
 char				*ft_strnew(size_t size);
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
@@ -73,7 +87,6 @@ char				**ft_tab_alloc(int l, int c);
 void				ft_tabiter(char **tab, char *(*f)(char*));
 void				ft_aff_tab(char **tab, int start, int end);
 int					ft_power(int n, int pow);
-int					ft_abs(int n);
 
 typedef struct		s_list
 {
@@ -100,6 +113,4 @@ typedef struct		s_tree
 t_tree				*ft_newnode(void const *content, size_t content_size);
 void				ft_delnode(t_tree *node);
 void				ft_deltree(t_tree *node);
-
-int					get_next_line(int fd, char **line);
 #endif
