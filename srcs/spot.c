@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 14:23:39 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/09/30 13:28:51 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/07 13:24:12 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void		create_spot(t_env *env, t_vector pos, t_color color)
 {
 	t_spot	*spot;
 
-	spot = (t_spot*)malloc(sizeof(t_spot));
+	if ((spot = (t_spot*)malloc(sizeof(t_spot))) == NULL)
+		error(1);
 	spot->spotpos = pos;
 	spot->color = color;
 	if (env->spot == NULL)

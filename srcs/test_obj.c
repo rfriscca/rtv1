@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 12:24:29 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/06 15:21:22 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/07 14:16:43 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void	test_obj(t_env *env)
 			test_plan(env);
 		else if (env->obj->type == 'c')
 			test_cylinder(env);
+		else if (env->obj->type == 'k')
+			test_cone(env);
 		env->obj = env->obj->next;
 	}
 	if (env->obj->type == 's')
@@ -85,5 +87,7 @@ void	test_obj(t_env *env)
 		test_plan(env);
 	else if (env->obj->type == 'c')
 		test_cylinder(env);
+	else if (env->obj->type == 'k')
+		test_cone(env);
 	env->obj = env->obj->first;
 }

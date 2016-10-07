@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/06 15:14:59 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/07 14:59:24 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ t_color				calc_color(t_env *env, t_color cobj, t_color clight, double angle);
 t_color				calc_shadow(t_env *env, t_color cobj, t_color clight);
 t_color				extract_color(int color);
 int					event(int n, t_env *env);
+void				error(int n);
 
 /*
 ** VECTOR FUNCTIONS
@@ -167,6 +168,7 @@ t_vector			normalize_vec(t_vector vec);
 t_vector			calc_vect(t_vector p1, t_vector p2);
 t_vector			ray_point(t_env *env);
 t_vector			calc_ncylinder(t_env *env);
+t_vector			calc_ncone(t_env *env);
 double				dotproduct(t_vector vec1, t_vector vec2);
 
 
@@ -192,6 +194,9 @@ int					test_plan2(t_env *env, t_vector pos, t_ray ray);
 void				create_cylinder(t_env *env, t_vector pos, t_color color);
 void				test_cylinder(t_env *env);
 int					test_cylinder2(t_env *env, t_vector pos, t_ray ray);
+void				create_cone(t_env *env, t_vector pos, t_color color);
+void				test_cone(t_env *env);
+int					test_cone2(t_env *env, t_vector pos, t_ray ray);
 
 
 void				test_obj(t_env *env);

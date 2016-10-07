@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:52:19 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/06 17:04:01 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/07 14:17:21 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void		create_obj(t_env *env, double x, double y, double z, t_color color)
 {
 	t_obj	*obj;
 
-	obj = (t_obj*)malloc(sizeof(t_obj));
+	if ((obj = (t_obj*)malloc(sizeof(t_obj))) == NULL)
+		error(1);
 	obj->type = 's';
 	obj->vec1.x = x;
 	obj->vec1.y = y;
@@ -57,16 +58,15 @@ int			main(int argc, char **argv)
 	t_color		color;
 	t_vector	pos;
 
-	env = (t_env*)malloc(sizeof(t_env));
+	if ((env = (t_env*)malloc(sizeof(t_env))) == NULL)
+		error(1);
 	env->obj = NULL;
 	env->spot = NULL;
 	color.r = 1; color.g = 1; color.b = 1;
-	//create_obj(env, 1, 0, -5, color);
-	pos.x = 0; pos.y = 0; pos.z = 0;
-	create_cylinder(env, pos, color);
-	create_plan(env, pos, color);
-	pos.x = 5; pos.y = 0; pos.z = 0;
-	create_plan(env, pos, color);
+	//create_obj(env, 1, 0, 0, color);
+	pos.x = -1; pos.y = 0; pos.z = 0;
+	//create_plan(env, pos, color);
+	create_cone(env, pos, color);
 	env->mlx = mlx_init();
 	env->img = mlx_new_image(env->mlx, WIDTH, HEIGHT);
 	env->img_data = mlx_get_data_addr(env->img, &env->bits_per_pixel,

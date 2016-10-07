@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/04 14:53:23 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/06 15:26:31 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/07 13:22:05 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	create_plan(t_env *env, t_vector pos, t_color color)
 {
 	t_obj	*obj;
 
-	obj = (t_obj*)malloc(sizeof(t_obj));
+	if ((obj = (t_obj*)malloc(sizeof(t_obj))) == NULL)
+		error(1);
 	obj->type = 'p';
 	obj->vec1 = pos;
 	obj->vec2.x = 1;

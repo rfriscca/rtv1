@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 14:06:46 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/06 16:54:08 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/07 15:06:41 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,20 @@ t_vector	calc_ncylinder(t_env *env)
 	n.x = (VDIRX * RDIST + CAMPOSX) - XS - N.x * m;
 	n.y = (VDIRY * RDIST + CAMPOSY) - YS - N.y * m;
 	n.z = (VDIRZ * RDIST + CAMPOSZ) - ZS - N.z * m;
+	return (n);
+}
+
+t_vector	calc_ncone(t_env *env)
+{
+	t_vector	n;
+	double		m;
+	t_vector	x;
+
+	x = calc_vect(POS, CAMPOS);
+	m = dotproduct(VDIR, N) * RDIST + dotproduct(x, N);
+	n.x = (VDIRX * RDIST + CAMPOSX) - XS - (1 + RS * RS) * NX * m;
+	n.y = (VDIRY * RDIST + CAMPOSY) - YS - (1 + RS * RS) * NY * m;
+	n.z = (VDIRZ * RDIST + CAMPOSZ) - ZS - (1 + RS * RS) * NZ * m;
 	return (n);
 }
 
