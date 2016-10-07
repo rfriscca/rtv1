@@ -6,22 +6,21 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:52:19 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/07 14:17:21 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/07 16:01:58 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void		create_obj(t_env *env, double x, double y, double z, t_color color)
+void		create_sphere(t_env *env, t_vector pos, t_color color)
 {
 	t_obj	*obj;
 
 	if ((obj = (t_obj*)malloc(sizeof(t_obj))) == NULL)
 		error(1);
 	obj->type = 's';
-	obj->vec1.x = x;
-	obj->vec1.y = y;
-	obj->vec1.z = z;
+	obj->vec1 = pos;
+	obj->vec2 = pos;
 	obj->r = 2;
 	obj->d1 = 0;
 	obj->d2 = 0;
@@ -63,7 +62,6 @@ int			main(int argc, char **argv)
 	env->obj = NULL;
 	env->spot = NULL;
 	color.r = 1; color.g = 1; color.b = 1;
-	//create_obj(env, 1, 0, 0, color);
 	pos.x = -1; pos.y = 0; pos.z = 0;
 	//create_plan(env, pos, color);
 	create_cone(env, pos, color);

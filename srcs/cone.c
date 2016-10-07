@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 13:59:20 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/07 15:00:16 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/07 15:57:28 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ int		test_cone2(t_env *env, t_vector pos, t_ray ray)
 	det = b * b - 4 * a * c;
 	if (det >= 0)
 	{
-		if ((D1 = (-b -sqrt(det)) / (2 * a)) > 0.01 && D1 < ray.dist)
+		if ((D1 = (-b - sqrt(det)) / (2 * a)) > 0.01 && D1 < ray.dist)
 			return (1);
-		if ((D2 = (-b -sqrt(det)) / (2 * a)) > 0.01 && D1 < ray.dist)
+		if ((D2 = (-b + sqrt(det)) / (2 * a)) > 0.01 && D1 < ray.dist)
 			return (1);
 	}
 	return (0);
