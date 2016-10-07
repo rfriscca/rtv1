@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/04 14:53:23 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/04 16:13:43 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/06 15:26:31 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	create_plan(t_env *env, t_vector pos, t_color color)
 	obj->vec2.x = 1;
 	obj->vec2.y = 0;
 	obj->vec2.z = 0;
-	obj->r = 2;
+	obj->r = 0;
 	obj->d1 = 0;
 	obj->d2 = 0;
 	obj->color = color;
@@ -44,10 +44,11 @@ void	create_plan(t_env *env, t_vector pos, t_color color)
 
 void	test_plan(t_env *env)
 {
-	double	dist;
+	double		dist;
+	t_vector	x;
 
-	dist = -((NX * (CAMPOSX - XS) + NY * (CAMPOSY - YS) + NZ * (CAMPOSZ - ZS)) /
-		   (NX * VDIRX + NY * VDIRY + NZ * VDIRZ));
+	x = calc_vect(POS, CAMPOS);
+	dist = -dotproduct(x, N) / dotproduct(VDIR, N);
 	if (dist > 0 && dist < RDIST)
 	{
 		RDIST = dist;
@@ -57,11 +58,18 @@ void	test_plan(t_env *env)
 
 int		test_plan2(t_env *env, t_vector pos, t_ray ray)
 {
-	double	dist;
+	double		dist;
+	t_vector	x;
 
-	dist = -((NX * (pos.x - XS) + NY * (pos.y - YS) + NZ * (pos.z - ZS)) /
-			(NX * ray.vecdir.x + NY * ray.vecdir.y + NZ * ray.vecdir.z));
-	if (dist > 0.1 && dist < ray.dist)
+	if (dotproduct(env->cam.vecdirz, env->obj->vec2) > 0)
+	{
+		env->obj->vec2.x = -env->obj->vec2.x;
+		env->obj->vec2.y = -env->obj->vec2.y;
+		env->obj->vec2.z = -env->obj->vec2.z;
+	}
+	x = calc_vect(POS, pos);
+	dist = -dotproduct(x, N) / dotproduct(ray.vecdir, N);
+	if (dist > 0.01 && dist < ray.dist)
 		return (1);
 	return (0);
 }

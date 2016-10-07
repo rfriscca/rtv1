@@ -6,17 +6,17 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/04 15:27:36 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/06 15:14:59 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RTV1_H
 # define RTV1_H
-# define WIDTH 640
-# define HEIGHT 480
-# define VPWIDTH 6.4
-# define VPHEIGHT 4.8
-# define VPDIST 12
+# define WIDTH 1000
+# define HEIGHT 720
+# define VPWIDTH 10.0
+# define VPHEIGHT 7.2
+# define VPDIST 20
 # define PI 3.14159265
 
 /*
@@ -27,9 +27,11 @@
 # define CAMPOSX env->cam.campos.x
 # define CAMPOSY env->cam.campos.y
 # define CAMPOSZ env->cam.campos.z
+# define CAMPOS env->cam.campos
 # define XINDENT env->cam.xindent
 # define YINDENT env->cam.yindent
 # define VPUL env->cam.vpul
+# define VDIR env->cam.ray.vecdir
 # define VDIRX env->cam.ray.vecdir.x
 # define VDIRY env->cam.ray.vecdir.y
 # define VDIRZ env->cam.ray.vecdir.z
@@ -40,9 +42,11 @@
 # define XS env->obj->vec1.x
 # define YS env->obj->vec1.y
 # define ZS env->obj->vec1.z
+# define POS env->obj->vec1
 # define NX env->obj->vec2.x
 # define NY env->obj->vec2.y
 # define NZ env->obj->vec2.z
+# define N env->obj->vec2
 # define RS env->obj->r
 # define D1 env->obj->d1
 # define D2 env->obj->d2
@@ -162,6 +166,7 @@ t_vector			translation(t_vector vec, double x, double y, double z);
 t_vector			normalize_vec(t_vector vec);
 t_vector			calc_vect(t_vector p1, t_vector p2);
 t_vector			ray_point(t_env *env);
+t_vector			calc_ncylinder(t_env *env);
 double				dotproduct(t_vector vec1, t_vector vec2);
 
 
@@ -184,6 +189,9 @@ int					test_sphere2(t_env *env, t_vector pos, t_ray ray);
 void				create_plan(t_env *env, t_vector pos, t_color color);
 void				test_plan(t_env *env);
 int					test_plan2(t_env *env, t_vector pos, t_ray ray);
+void				create_cylinder(t_env *env, t_vector pos, t_color color);
+void				test_cylinder(t_env *env);
+int					test_cylinder2(t_env *env, t_vector pos, t_ray ray);
 
 
 void				test_obj(t_env *env);

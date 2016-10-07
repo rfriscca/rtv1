@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 15:15:57 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/04 15:44:43 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/06 16:58:53 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ int		lightcaster2(t_env *env, t_vector pos, t_ray ray)
 			return (1);
 	if (env->obj->type == 'p')
 		if (test_plan2(env, pos, ray) == 1)
+			return (1);
+	if (env->obj->type == 'c')
+		if (test_cylinder2(env, pos, ray) == 1)
 			return (1);
 	return (0);
 }
@@ -68,6 +71,8 @@ void	test_spot2(t_env *env)
 		vec_ctoo = normalize_vec(calc_vect(OBJTOUCHED->vec1, point));
 	else if (OBJTOUCHED->type == 'p')
 		vec_ctoo = OBJTOUCHED->vec2;
+	else if (OBJTOUCHED->type == 'c')
+		vec_ctoo = normalize_vec(calc_ncylinder(env));
 	vec_ltoo = normalize_vec(calc_vect(env->spot->spotpos, point));
 	vec_otol = normalize_vec(calc_vect(point, env->spot->spotpos));
 	angle = dotproduct(vec_otol, vec_ctoo);
