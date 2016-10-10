@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:52:19 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/07 16:01:58 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/10 14:08:58 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,28 +56,21 @@ int			main(int argc, char **argv)
 	t_env		*env;
 	t_color		color;
 	t_vector	pos;
+	int			fd;
 
 	if ((env = (t_env*)malloc(sizeof(t_env))) == NULL)
 		error(1);
+	if (argc != 2)
+		error(2);
+	fd = open(argv[1], O_RDONLY);
+	env->file = save_file(fd);
+	while (1);
 	env->obj = NULL;
 	env->spot = NULL;
-	color.r = 1; color.g = 1; color.b = 1;
-	pos.x = -1; pos.y = 0; pos.z = 0;
-	//create_plan(env, pos, color);
-	create_cone(env, pos, color);
 	env->mlx = mlx_init();
 	env->img = mlx_new_image(env->mlx, WIDTH, HEIGHT);
 	env->img_data = mlx_get_data_addr(env->img, &env->bits_per_pixel,
 			&env->size_line, &env->endian);
-	env->cam = init_cam(0, 0, -30);
-	color.r = 255; color.g = 0; color.b = 0;
-	init_spot(env, 3, -5, -10, color);
-	color.r = 0; color.g = 0; color.b = 255;
-	init_spot(env, 3, 5, -10, color);
-	//color.r = 0; color.g = 255; color.b = 0;
-	init_spot(env, 10, 0, -20, color);
-	color.r = 255; color.g = 255; color.b = 255;
-	init_spot(env, 4, 0, 25, color);
 	raycaster(env);
 	env->win = mlx_new_window(env->mlx, WIDTH, HEIGHT, "RTv1");
 	mlx_key_hook(env->win, event, env);

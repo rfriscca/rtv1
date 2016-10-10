@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/07 14:59:24 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/10 14:10:59 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@
 
 
 # include <math.h>
+# include <fcntl.h>
 # include "mlx.h"
-# include <stdlib.h>
-# include <unistd.h>
+# include "libft.h"
 
 //test
 # include <stdio.h>
@@ -87,6 +87,13 @@ typedef struct		s_color
 	double			g;
 	double			b;
 }					t_color;
+
+typedef struct		s_line
+{
+	char			*line;
+	int				size;
+	struct s_line	*next;
+}					t_line;
 
 typedef struct		s_obj
 {
@@ -141,7 +148,7 @@ typedef struct		s_env
 	int				endian;
 	double			x;
 	double			y;
-	double			rotx;
+	t_line			*file;
 	t_obj			*obj;
 	t_camera		cam;
 	t_spot			*spot;
@@ -155,6 +162,8 @@ t_color				calc_shadow(t_env *env, t_color cobj, t_color clight);
 t_color				extract_color(int color);
 int					event(int n, t_env *env);
 void				error(int n);
+t_line				*ft_new_line(char *line, int size);
+t_line				*save_file(int fd);
 
 /*
 ** VECTOR FUNCTIONS

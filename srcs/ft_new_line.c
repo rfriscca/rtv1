@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_new_line.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/07 13:19:38 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/10 14:01:09 by rfriscca         ###   ########.fr       */
+/*   Created: 2016/10/10 13:48:55 by rfriscca          #+#    #+#             */
+/*   Updated: 2016/10/10 14:07:51 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	error(int n)
+t_line	*ft_new_line(char *line, int size)
 {
-	if (n == 1)
+	t_line	*file;
+	int		i;
+
+	i = 0;
+	if ((file = (t_line*)malloc(sizeof(*file))) == NULL)
+		error(1);
+	if ((file->line = ft_strnew(size)) == NULL)
+		error(1);
+	file->next = NULL;
+	while (i < size)
 	{
-		write(1, "Malloc failed", 13);
-		exit(1);
+		file->line[i] = line[i];
+		++i;
 	}
-	else if (n == 2)
-	{
-		write(1, "Need 2 arguments", 16);
-		exit(1);
-	}
-	else if (n == 3)
-	{
-		write(1, "get next line error", 19);
-		exit(1);
-	}
+	file->size = size;
+	free(line);
+	return (file);
 }
