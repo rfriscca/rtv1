@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/10 14:10:59 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/10 15:01:20 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,8 @@ int					event(int n, t_env *env);
 void				error(int n);
 t_line				*ft_new_line(char *line, int size);
 t_line				*save_file(int fd);
+double				ft_atof(char *str);
+
 
 /*
 ** VECTOR FUNCTIONS

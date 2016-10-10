@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_file.c                                       :+:      :+:    :+:   */
+/*   atof.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/10 14:33:07 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/10 14:52:20 by rfriscca         ###   ########.fr       */
+/*   Created: 2016/10/10 14:52:49 by rfriscca          #+#    #+#             */
+/*   Updated: 2016/10/10 15:11:09 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	test_line(t_env *env)
+double	ft_atof(char *str)
 {
-	t_vector	transfo[258];
+	double	a;
+	double	b;
+	int		i;
+	int		j;
 
-	if (env->file->line[0] == 'c')
-}
-
-void	parse_file(t_env *env)
-{
-	while (env->file)
-	{
-		test_line(env);
-		env->file = env->file->next;
-	}
+	j = 0;
+	i = 0;
+	a = (double)ft_atoi(str);
+	printf("%f\n", a);
+	while (str[i] != '.')
+		++i;
+	++i;
+	while (ft_isdigit(str[i + j]))
+		++j;
+	b = (double)ft_atoi(str + i) / (pow(10, j));
+	printf("%f\n", b);
+	return (a + b);
 }
