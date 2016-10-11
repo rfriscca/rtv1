@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/11 16:34:15 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/11 17:37:56 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,8 @@ void				error(int n);
 t_line				*ft_new_line(char *line, int size);
 t_line				*save_file(int fd);
 double				ft_atof(char *str);
+t_color				default_color(void);
+t_vector			default_pos(void);
 void				parse_file(t_env *env);
 
 /*
@@ -199,6 +201,7 @@ void				camangle(t_env *env, double rx, double ry, double rz);
 ** OBJECTS FUNCTIONS
 */
 
+void				create_sphere(t_env *env, t_vector pos, t_color color, double r);
 void				create_spot(t_env *env, t_vector pos, t_color color);
 void				test_spot(t_env *env);
 int					test_sphere2(t_env *env, t_vector pos, t_ray ray);

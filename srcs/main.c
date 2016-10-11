@@ -6,13 +6,13 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:52:19 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/11 16:02:21 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/11 17:37:12 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void		create_sphere(t_env *env, t_vector pos, t_color color)
+void		create_sphere(t_env *env, t_vector pos, t_color color, double r)
 {
 	t_obj	*obj;
 
@@ -21,7 +21,7 @@ void		create_sphere(t_env *env, t_vector pos, t_color color)
 	obj->type = 's';
 	obj->vec1 = pos;
 	obj->vec2 = pos;
-	obj->r = 2;
+	obj->r = r;
 	obj->d1 = 0;
 	obj->d2 = 0;
 	obj->color = color;
@@ -67,9 +67,6 @@ int			main(int argc, char **argv)
 	env->obj = NULL;
 	env->spot = NULL;
 	parse_file(env);
-	pos.x = 0; pos.y = 0; pos.z = 0;
-	color.r = 1; color.g = 1; color.b = 1;
-	create_sphere(env, pos, color);
 	pos.x = 1; pos.y = 4; pos.z = -7;
 	color.r = 255; color.g = 0; color.b = 0;
 	create_spot(env, pos, color);

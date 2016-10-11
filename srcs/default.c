@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   atof.c                                             :+:      :+:    :+:   */
+/*   default.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/10 14:52:49 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/11 17:42:10 by rfriscca         ###   ########.fr       */
+/*   Created: 2016/10/11 17:26:41 by rfriscca          #+#    #+#             */
+/*   Updated: 2016/10/11 17:28:29 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-double	ft_atof(char *str)
+t_color		default_color(void)
 {
-	double	a;
-	double	b;
-	int		i;
-	int		j;
+	t_color		color;
 
-	j = 0;
-	i = 0;
-	a = 0.0;
-	b = 0.0;
-	while (!ft_isdigit(str[i]) && str[i] != '-')
-		++i;
-	a = (double)ft_atoi(str);
-	while (str[i] != '.' && (ft_isdigit(str[i]) || str[i] == ' '))
-		++i;
-	if (str[i] == '.')
-	{
-		++i;
-		while (ft_isdigit(str[i + j]))
-			++j;
-		b = (double)ft_atoi(str + i) / (pow(10, j));
-	}
-	return (a + b);
+	color.r = 1;
+	color.g = 1;
+	color.b = 1;
+	return (color);
+}
+
+t_vector	default_pos(void)
+{
+	t_vector	v;
+
+	v.x = 0;
+	v.y = 0;
+	v.z = 0;
+	return (v);
 }
