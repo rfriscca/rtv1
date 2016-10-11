@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/10 15:01:20 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/11 15:29:17 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ double				ft_atof(char *str);
 t_vector			rotx(t_vector vec, double angle);
 t_vector			roty(t_vector vec, double angle);
 t_vector			rotz(t_vector vec, double angle);
-t_vector			translation(t_vector vec, double x, double y, double z);
+t_vector			translation(t_vector vec, t_vector translation);
 t_vector			normalize_vec(t_vector vec);
 t_vector			calc_vect(t_vector p1, t_vector p2);
 t_vector			ray_point(t_env *env);

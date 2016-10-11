@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:52:19 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/10 14:08:58 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/11 15:33:24 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,18 @@ int			main(int argc, char **argv)
 		error(2);
 	fd = open(argv[1], O_RDONLY);
 	env->file = save_file(fd);
-	while (1);
 	env->obj = NULL;
 	env->spot = NULL;
+	pos.x = 0; pos.y = 0; pos.z = 0;
+	color.r = 1; color.g = 1; color.b = 1;
+	create_sphere(env, pos, color);
+	pos.x = 1; pos.y = 4; pos.z = -7;
+	color.r = 255; color.g = 0; color.b = 0;
+	create_spot(env, pos, color);
+	pos.x = 1; pos.y = -4; pos.z = -7;
+	color.r = 0; color.g = 0; color.b = 255;
+	create_spot(env, pos, color);
+	env->cam = init_cam(0, 0, -20);
 	env->mlx = mlx_init();
 	env->img = mlx_new_image(env->mlx, WIDTH, HEIGHT);
 	env->img_data = mlx_get_data_addr(env->img, &env->bits_per_pixel,
