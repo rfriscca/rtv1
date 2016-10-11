@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 14:52:49 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/11 17:42:10 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/11 17:51:43 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ double	ft_atof(char *str)
 	b = 0.0;
 	while (!ft_isdigit(str[i]) && str[i] != '-')
 		++i;
-	a = (double)ft_atoi(str);
+	a = (double)ft_atoi(str + i);
 	while (str[i] != '.' && (ft_isdigit(str[i]) || str[i] == ' '))
 		++i;
 	if (str[i] == '.')
