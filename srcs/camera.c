@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 12:11:56 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/11 15:28:01 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/11 16:16:17 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ void		rotcam(t_env *env, double rx, double ry, double rz)
 		env->cam.campos = roty(env->cam.campos, ry);
 	if (rz != 0)
 		env->cam.campos = rotz(env->cam.campos, rz);
+	env->cam.vpul = vpupleft(env->cam);
+}
+
+void		transcam(t_env *env, t_vector trans)
+{
+	CAMPOS = translation(CAMPOS, trans);
 	env->cam.vpul = vpupleft(env->cam);
 }
 

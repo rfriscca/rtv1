@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/11 15:29:17 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/11 16:34:15 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@
 # define VDXY cam.vecdirx.y
 # define VDXZ cam.vecdirx.z
 
+# define LINE env->file->line
+# define LINENEXT env->file->next->line
 
 # include <math.h>
 # include <fcntl.h>
@@ -165,7 +167,7 @@ void				error(int n);
 t_line				*ft_new_line(char *line, int size);
 t_line				*save_file(int fd);
 double				ft_atof(char *str);
-
+void				parse_file(t_env *env);
 
 /*
 ** VECTOR FUNCTIONS
@@ -188,6 +190,7 @@ double				dotproduct(t_vector vec1, t_vector vec2);
 */
 
 t_camera			init_cam(double x, double y, double z);
+void				transcam(t_env *env, t_vector trans);
 void				rotcam(t_env *env, double rx, double ry, double rz);
 void				camangle(t_env *env, double rx, double ry, double rz);
 

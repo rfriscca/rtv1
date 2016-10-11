@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:52:19 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/11 15:33:24 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/11 16:02:21 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int			main(int argc, char **argv)
 	env->file = save_file(fd);
 	env->obj = NULL;
 	env->spot = NULL;
+	parse_file(env);
 	pos.x = 0; pos.y = 0; pos.z = 0;
 	color.r = 1; color.g = 1; color.b = 1;
 	create_sphere(env, pos, color);
@@ -75,7 +76,6 @@ int			main(int argc, char **argv)
 	pos.x = 1; pos.y = -4; pos.z = -7;
 	color.r = 0; color.g = 0; color.b = 255;
 	create_spot(env, pos, color);
-	env->cam = init_cam(0, 0, -20);
 	env->mlx = mlx_init();
 	env->img = mlx_new_image(env->mlx, WIDTH, HEIGHT);
 	env->img_data = mlx_get_data_addr(env->img, &env->bits_per_pixel,
