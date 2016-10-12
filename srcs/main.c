@@ -6,40 +6,11 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:52:19 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/11 17:37:12 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 12:21:05 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-void		create_sphere(t_env *env, t_vector pos, t_color color, double r)
-{
-	t_obj	*obj;
-
-	if ((obj = (t_obj*)malloc(sizeof(t_obj))) == NULL)
-		error(1);
-	obj->type = 's';
-	obj->vec1 = pos;
-	obj->vec2 = pos;
-	obj->r = r;
-	obj->d1 = 0;
-	obj->d2 = 0;
-	obj->color = color;
-	if (env->obj == NULL)
-	{
-		obj->first = obj;
-		obj->next = NULL;
-		env->obj = obj;
-	}
-	else
-	{
-		obj->first = env->obj->first;
-		while (env->obj->next != NULL)
-			env->obj = env->obj->next;
-		env->obj->next = obj;
-	}
-	env->obj = env->obj->first;
-}
 
 void		init_spot(t_env *env, double x, double y, double z, t_color color)
 {

@@ -1,0 +1,19 @@
+directory objects :
+
+It contains all functions to create objects and also the functions which gives the intersection with a ray
+
+directory parser :
+
+All functions to extract data from a file
+
+directory raycaster :
+
+Functions that casts ray pixel by pixel and light functions
+
+directory vec_transfo :
+
+Transformations like rotation, translation ... And all the formulas on vector like dotproduct, addition of vector ...
+
+directory misc :
+
+All the others functions which are not classified

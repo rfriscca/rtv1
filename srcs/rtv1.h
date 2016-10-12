@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/11 17:37:56 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 12:30:07 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,15 @@ t_line				*save_file(int fd);
 double				ft_atof(char *str);
 t_color				default_color(void);
 t_vector			default_pos(void);
+
+/*
+** PARSER FUNCTIONS
+*/ 
+
+t_vector			get_vector(t_env *env);
+t_color				get_color(t_env *env);
+void				parse_camera(t_env *env);
+void				parse_sphere(t_env *env);
 void				parse_file(t_env *env);
 
 /*
@@ -202,9 +211,10 @@ void				camangle(t_env *env, double rx, double ry, double rz);
 */
 
 void				create_sphere(t_env *env, t_vector pos, t_color color, double r);
+void				test_sphere(t_env *env);
+int					test_sphere2(t_env *env, t_vector pos, t_ray ray);
 void				create_spot(t_env *env, t_vector pos, t_color color);
 void				test_spot(t_env *env);
-int					test_sphere2(t_env *env, t_vector pos, t_ray ray);
 void				create_plan(t_env *env, t_vector pos, t_color color);
 void				test_plan(t_env *env);
 int					test_plan2(t_env *env, t_vector pos, t_ray ray);
