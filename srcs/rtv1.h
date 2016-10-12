@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 13:26:27 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 13:45:19 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,14 @@ typedef struct		s_obj
 	struct s_obj	*first;
 }					t_obj;
 
+typedef struct		s_parse
+{
+	t_vector		pos;
+	t_vector		n;
+	t_color			color;
+	double			r;
+}					t_parse;
+
 typedef struct		s_ray
 {
 	t_vector		vecdir;
@@ -184,6 +192,8 @@ void				parse_camera(t_env *env);
 void				parse_sphere(t_env *env);
 void				parse_spot(t_env *env);
 void				parse_plane(t_env *env);
+void				parse_cylinder(t_env *env);
+void				parse_cone(t_env *env);
 void				parse_file(t_env *env);
 
 /*
@@ -225,10 +235,10 @@ void				test_spot(t_env *env);
 void				create_plan(t_env *env, t_vector pos, t_color color, t_vector n);
 void				test_plan(t_env *env);
 int					test_plan2(t_env *env, t_vector pos, t_ray ray);
-void				create_cylinder(t_env *env, t_vector pos, t_color color);
+void				create_cylinder(t_env *env, t_parse data);
 void				test_cylinder(t_env *env);
 int					test_cylinder2(t_env *env, t_vector pos, t_ray ray);
-void				create_cone(t_env *env, t_vector pos, t_color color);
+void				create_cone(t_env *env, t_parse data);
 void				test_cone(t_env *env);
 int					test_cone2(t_env *env, t_vector pos, t_ray ray);
 

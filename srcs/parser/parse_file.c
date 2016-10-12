@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 14:33:07 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 13:29:30 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 13:54:14 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,10 @@ void		parse_file(t_env *env)
 			parse_spot(env);
 		else if (!ft_strcmp(LINE, "plane"))
 			parse_plane(env);
+		else if (!ft_strcmp(LINE, "cylinder"))
+			parse_cylinder(env);
+		else if (!ft_strcmp(LINE, "cone"))
+			parse_cone(env);
 		if (env->file)
 			env->file = env->file->next;
 	}

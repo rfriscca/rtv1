@@ -6,27 +6,25 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 13:57:47 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/07 13:21:37 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 13:36:52 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	create_cylinder(t_env *env, t_vector pos, t_color color)
+void	create_cylinder(t_env *env, t_parse data)
 {
 	t_obj	*obj;
 
 	if ((obj = (t_obj*)malloc(sizeof(t_obj))) == NULL)
 		error(1);
 	obj->type = 'c';
-	obj->vec1 = pos;
-	obj->vec2.x = 1;
-	obj->vec2.y = 0;
-	obj->vec2.z = 0;
-	obj->r = 1;
+	obj->vec1 = data.pos;
+	obj->vec2 = data.n;
+	obj->r = data.r;
 	obj->d1 = 0;
 	obj->d2 = 0;
-	obj->color = color;
+	obj->color = data.color;
 	if (env->obj == NULL)
 	{
 		obj->first = obj;

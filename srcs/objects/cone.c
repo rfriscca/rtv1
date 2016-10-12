@@ -6,27 +6,25 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 13:59:20 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/07 15:57:28 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 13:37:33 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	create_cone(t_env *env, t_vector pos, t_color color)
+void	create_cone(t_env *env, t_parse data)
 {
 	t_obj	*obj;
 
 	if ((obj = (t_obj*)malloc(sizeof(t_obj))) == NULL)
 		error(1);
 	obj->type = 'k';
-	obj->vec1 = pos;
-	obj->vec2.x = 1;
-	obj->vec2.y = 0;
-	obj->vec2.z = 0;
-	obj->r = 0.2;
+	obj->vec1 = data.pos;
+	obj->vec2 = data.n;
+	obj->r = data.r;
 	obj->d1 = 0;
 	obj->d2 = 0;
-	obj->color = color;
+	obj->color = data.color;
 	if (env->obj == NULL)
 	{
 		obj->first = obj;
