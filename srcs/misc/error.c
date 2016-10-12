@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 13:19:38 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 14:50:40 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 16:44:12 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	expand_error(int n)
 	if (n == 5)
 	{
 		ft_putstr("file is not valid\n");
+		exit(1);
+	}
+	if (n == 6)
+	{
+		ft_putstr("No objects\n");
 		exit(1);
 	}
 }

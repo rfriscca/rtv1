@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 15:15:57 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 14:48:56 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 16:43:15 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,6 @@ void	test_spot2(t_env *env)
 
 void	test_spot(t_env *env)
 {
-	if (!env->spot)
-		error(4);
 	while (env->spot->next)
 	{
 		test_spot2(env);

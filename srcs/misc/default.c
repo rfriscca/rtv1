@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 17:26:41 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 13:29:44 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 16:53:30 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ t_vector	default_n(void)
 	n.y = 0;
 	n.z = 0;
 	return (n);
+}
+
+t_color		default_color_spot(void)
+{
+	t_color		color;
+
+	color.r = 255;
+	color.g = 255;
+	color.b = 255;
+	return (color);
 }
 
 t_color		default_color(void)
