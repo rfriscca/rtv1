@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 14:33:07 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 12:15:06 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 13:04:31 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,34 +71,40 @@ t_color		get_color(t_env *env)
 		}
 		++i;
 	}
+	color_correc_obj(c);
 	return (c);
 }
 
-void		parse_sphere(t_env *env)
+t_color		get_color_spot(t_env *env)
 {
-	t_vector	pos;
-	t_vector	trans;
-	t_color		color;
-	double		r;
+	t_color		c;
+	int			i;
 
-	color = default_color();
-	pos = default_pos();
-	r = 1;
-	while (env->file->next && (LINENEXT[0] == 't' || LINENEXT[0] == 'c'
-				|| LINENEXT[0] == 'o'))
+	i = 0;
+	while (LINE[i])
 	{
-		env->file = env->file->next;
-		if (LINE[0] == 't')
+		if (ft_isdigit(LINE[i]) || LINE[i] == '-')
 		{
-			trans = get_vector(env);
-			pos = translation(pos, trans);
+			c.r = ft_atof(LINE + i);
+			while (LINE[i] && LINE[i] != ',')
+				++i;
+			if (!LINE[i])
+				error(5);
+			++i;
+			c.g = ft_atof(LINE + i);
+			while (LINE[i] && LINE[i] != ',')
+				++i;
+			if (!LINE[i])
+				error(5);
+			++i;
+			c.b = ft_atof(LINE + i);
+			while (LINE[i] && LINE[i] != ')')
+				++i;
 		}
-		else if (LINE[0] == 'c')
-			color = get_color(env);
-		else if (LINE[0] == 'o')
-			r = ft_atof(LINE);
+		++i;
 	}
-	create_sphere(env, pos, color, r);
+	color_correc_spot(c);
+	return (c);
 }
 
 void		parse_file(t_env *env)
@@ -109,6 +115,8 @@ void		parse_file(t_env *env)
 			parse_camera(env);
 		else if (!ft_strcmp(LINE, "sphere"))
 			parse_sphere(env);
+		else if (!ft_strcmp(LINE, "spot"))
+			parse_spot(env);
 		if (env->file)
 			env->file = env->file->next;
 	}

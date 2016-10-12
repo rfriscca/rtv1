@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:52:19 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 12:21:05 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 13:04:44 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,6 @@ int			main(int argc, char **argv)
 	env->obj = NULL;
 	env->spot = NULL;
 	parse_file(env);
-	pos.x = 1; pos.y = 4; pos.z = -7;
-	color.r = 255; color.g = 0; color.b = 0;
-	create_spot(env, pos, color);
-	pos.x = 1; pos.y = -4; pos.z = -7;
-	color.r = 0; color.g = 0; color.b = 255;
-	create_spot(env, pos, color);
 	env->mlx = mlx_init();
 	env->img = mlx_new_image(env->mlx, WIDTH, HEIGHT);
 	env->img_data = mlx_get_data_addr(env->img, &env->bits_per_pixel,

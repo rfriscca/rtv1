@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 12:30:07 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 13:06:44 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,8 +176,12 @@ t_vector			default_pos(void);
 
 t_vector			get_vector(t_env *env);
 t_color				get_color(t_env *env);
+t_color				get_color_spot(t_env * env);
+t_color				color_correc_spot(t_color color);
+t_color				color_correc_obj(t_color color);
 void				parse_camera(t_env *env);
 void				parse_sphere(t_env *env);
+void				parse_spot(t_env *env);
 void				parse_file(t_env *env);
 
 /*
