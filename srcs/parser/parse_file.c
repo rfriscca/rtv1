@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 14:33:07 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 13:54:14 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 16:17:03 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,18 @@ t_color		get_color_spot(t_env *env)
 	return (c);
 }
 
+void		free_file(t_env *env)
+{
+	if (env->file->line)
+		free(env->file->line);
+	if (env->file)
+		free(env->file);
+}
+
 void		parse_file(t_env *env)
 {
+	t_line	*file;
+
 	while (env->file)
 	{
 		if (!ft_strcmp(LINE, "camera"))
@@ -124,6 +134,10 @@ void		parse_file(t_env *env)
 		else if (!ft_strcmp(LINE, "cone"))
 			parse_cone(env);
 		if (env->file)
-			env->file = env->file->next;
+		{
+			file = env->file->next;
+			free_file(env);
+			env->file = file;
+		}
 	}
 }

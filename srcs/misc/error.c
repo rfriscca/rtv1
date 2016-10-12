@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 13:19:38 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/11 16:29:46 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 14:50:40 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	error(int n)
 	}
 	else if (n == 4)
 	{
+		ft_putstr("No spot\n");
+		exit(1);
 	}
 	else
 		expand_error(n);

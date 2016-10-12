@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:10:18 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 13:28:08 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 16:22:38 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	parse_plane(t_env *env)
 	t_vector	trans;
 	t_color		color;
 	t_vector	n;
+	t_line		*file;
 
 	pos = default_pos();
 	color = default_color();
@@ -25,7 +26,9 @@ void	parse_plane(t_env *env)
 	while (env->file->next && (LINENEXT[0] == 't' || LINENEXT[0] == 'c'
 				|| LINENEXT[0] == 'r'))
 	{
-		env->file = env->file->next;
+		file = env->file->next;
+		free_file(env);
+		env->file = file;
 		if (LINE[0] == 't')
 		{
 			trans = get_vector(env);

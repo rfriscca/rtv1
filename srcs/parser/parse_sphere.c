@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 12:45:49 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 12:56:20 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 16:20:36 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	parse_sphere(t_env *env)
 	t_vector	pos;
 	t_vector	trans;
 	t_color		color;
+	t_line		*file;
 	double		r;
 
 	color = default_color();
@@ -25,7 +26,9 @@ void	parse_sphere(t_env *env)
 	while (env->file->next && (LINENEXT[0] == 't' || LINENEXT[0] == 'c'
 				|| LINENEXT[0] == 'o'))
 	{
-		env->file = env->file->next;
+		file = env->file->next;
+		free_file(env);
+		env->file = file;
 		if (LINE[0] == 't')
 		{
 			trans = get_vector(env);

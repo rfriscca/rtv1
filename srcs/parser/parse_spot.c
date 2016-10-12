@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 12:50:46 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 13:22:10 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 16:19:53 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@ void	parse_spot(t_env *env)
 	t_vector	pos;
 	t_vector	trans;
 	t_color		color;
+	t_line		*file;
 
 	color = default_color();
 	pos = default_pos();
 	while (env->file->next && (LINENEXT[0] == 't' || LINENEXT[0] == 'c'))
 	{
-		env->file = env->file->next;
+		file = env->file->next;
+		free_file(env);
+		env->file = file;
 		if (LINE[0] == 't')
 		{
 			trans = get_vector(env);

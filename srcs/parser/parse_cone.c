@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:47:36 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 13:53:07 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 16:22:01 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	parse_cone(t_env *env)
 {
 	t_parse		data;
 	t_vector	trans;
+	t_line		*file;
 
 	data.pos = default_pos();
 	data.n = default_n();
@@ -24,7 +25,9 @@ void	parse_cone(t_env *env)
 	while (env->file->next && (LINENEXT[0] == 'r' || LINENEXT[0] == 't'
 				|| LINENEXT[0] == 'o' || LINENEXT[0] == 'c'))
 	{
-		env->file = env->file->next;
+		file = env->file->next;
+		free_file(env);
+		env->file = file;
 		if (LINE[0] == 't')
 		{
 			trans = get_vector(env);

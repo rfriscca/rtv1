@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 12:00:24 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 12:04:03 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 16:23:32 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 void	parse_camera(t_env *env)
 {
 	t_vector	trans;
+	t_line		*file;
 
 	env->cam = init_cam(0, 0, 0);
 	while (env->file->next && (LINENEXT[0] == 't' || LINENEXT[0] == 'r'))
 	{
-		env->file = env->file->next;
+		file = env->file->next;
+		free_file(env);
+		env->file = file;
 		if (LINE[0] == 't' || LINE[0] == 'r')
 		{
 			trans = get_vector(env);

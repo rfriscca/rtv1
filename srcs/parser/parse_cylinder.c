@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:38:33 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 13:46:58 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 16:21:17 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	parse_cylinder(t_env *env)
 {
 	t_vector	trans;
+	t_line		*file;
 	t_parse		data;
 
 	data.pos = default_pos();
@@ -24,7 +25,9 @@ void	parse_cylinder(t_env *env)
 	while (env->file->next && (LINENEXT[0] == 'r' || LINENEXT[0] == 't'
 				|| LINENEXT[0] == 'o' || LINENEXT[0] == 'c'))
 	{
-		env->file = env->file->next;
+		file = env->file->next;
+		free_file(env);
+		env->file = file;
 		if (LINE[0] == 't')
 		{
 			trans = get_vector(env);

@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 13:45:19 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 16:23:15 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ double				ft_atof(char *str);
 t_color				default_color(void);
 t_vector			default_pos(void);
 t_vector			default_n(void);
+void				free_file(t_env *env);
 
 /*
 ** PARSER FUNCTIONS
