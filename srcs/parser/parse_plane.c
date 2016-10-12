@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_spot.c                                       :+:      :+:    :+:   */
+/*   parse_plane.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/12 12:50:46 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 13:22:10 by rfriscca         ###   ########.fr       */
+/*   Created: 2016/10/12 13:10:18 by rfriscca          #+#    #+#             */
+/*   Updated: 2016/10/12 13:28:08 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	parse_spot(t_env *env)
+void	parse_plane(t_env *env)
 {
 	t_vector	pos;
 	t_vector	trans;
 	t_color		color;
+	t_vector	n;
 
-	color = default_color();
 	pos = default_pos();
-	while (env->file->next && (LINENEXT[0] == 't' || LINENEXT[0] == 'c'))
+	color = default_color();
+	n = default_n();
+	while (env->file->next && (LINENEXT[0] == 't' || LINENEXT[0] == 'c'
+				|| LINENEXT[0] == 'r'))
 	{
 		env->file = env->file->next;
 		if (LINE[0] == 't')
@@ -28,8 +31,13 @@ void	parse_spot(t_env *env)
 			trans = get_vector(env);
 			pos = translation(pos, trans);
 		}
+		else if (LINE[0] == 'r')
+		{
+			trans = get_vector(env);
+			n = rotvec(n, trans);
+		}
 		else if (LINE[0] == 'c')
-			color = get_color_spot(env);
+			color = get_color(env);
 	}
-	create_spot(env, pos, color);
+	create_plan(env, pos, color, n);
 }

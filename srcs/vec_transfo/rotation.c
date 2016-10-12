@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 12:54:01 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/09/30 15:15:36 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 13:27:34 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,12 @@ t_vector	rotz(t_vector vec, double angle)
 	vecrot.y = vec.x * sin(angle) + vec.y * cos(angle);
 	vecrot.z = vec.z;
 	return (vecrot);
+}
+
+t_vector	rotvec(t_vector vec, t_vector trans)
+{
+	vec = rotx(vec, PI * trans.x / 180);
+	vec = roty(vec, PI * trans.y / 180);
+	vec = rotz(vec, PI * trans.z / 180);
+	return (vec);
 }

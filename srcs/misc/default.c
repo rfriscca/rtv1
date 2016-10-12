@@ -6,11 +6,21 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 17:26:41 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/11 17:28:29 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 13:29:44 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+t_vector	default_n(void)
+{
+	t_vector	n;
+
+	n.x = 1;
+	n.y = 0;
+	n.z = 0;
+	return (n);
+}
 
 t_color		default_color(void)
 {

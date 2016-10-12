@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 13:06:44 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 13:26:27 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ t_line				*save_file(int fd);
 double				ft_atof(char *str);
 t_color				default_color(void);
 t_vector			default_pos(void);
+t_vector			default_n(void);
 
 /*
 ** PARSER FUNCTIONS
@@ -182,6 +183,7 @@ t_color				color_correc_obj(t_color color);
 void				parse_camera(t_env *env);
 void				parse_sphere(t_env *env);
 void				parse_spot(t_env *env);
+void				parse_plane(t_env *env);
 void				parse_file(t_env *env);
 
 /*
@@ -191,6 +193,7 @@ void				parse_file(t_env *env);
 t_vector			rotx(t_vector vec, double angle);
 t_vector			roty(t_vector vec, double angle);
 t_vector			rotz(t_vector vec, double angle);
+t_vector			rotvec(t_vector vec, t_vector trans);
 t_vector			translation(t_vector vec, t_vector translation);
 t_vector			normalize_vec(t_vector vec);
 t_vector			calc_vect(t_vector p1, t_vector p2);
@@ -219,7 +222,7 @@ void				test_sphere(t_env *env);
 int					test_sphere2(t_env *env, t_vector pos, t_ray ray);
 void				create_spot(t_env *env, t_vector pos, t_color color);
 void				test_spot(t_env *env);
-void				create_plan(t_env *env, t_vector pos, t_color color);
+void				create_plan(t_env *env, t_vector pos, t_color color, t_vector n);
 void				test_plan(t_env *env);
 int					test_plan2(t_env *env, t_vector pos, t_ray ray);
 void				create_cylinder(t_env *env, t_vector pos, t_color color);

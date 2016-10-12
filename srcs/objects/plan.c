@@ -6,13 +6,13 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/04 14:53:23 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/07 13:22:05 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/12 13:29:12 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	create_plan(t_env *env, t_vector pos, t_color color)
+void	create_plan(t_env *env, t_vector pos, t_color color, t_vector n)
 {
 	t_obj	*obj;
 
@@ -20,9 +20,7 @@ void	create_plan(t_env *env, t_vector pos, t_color color)
 		error(1);
 	obj->type = 'p';
 	obj->vec1 = pos;
-	obj->vec2.x = 1;
-	obj->vec2.y = 0;
-	obj->vec2.z = 0;
+	obj->vec2 = n;
 	obj->r = 0;
 	obj->d1 = 0;
 	obj->d2 = 0;
