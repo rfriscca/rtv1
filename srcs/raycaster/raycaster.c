@@ -6,46 +6,11 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:22:46 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/13 13:15:28 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/13 13:59:25 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-int		event(int n, t_env *env)
-{
-	if (n == 53)
-		exit(1);
-	else if (n == 124)
-	{
-		rotcam(env, 0.1, 0, 0);
-		camangle(env, 0.1, 0, 0);
-		raycaster(env);
-		mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
-	}
-	else if (n == 123)
-	{
-		rotcam(env, -0.1, 0, 0);
-		camangle(env, -0.1, 0, 0);
-		raycaster(env);
-		mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
-	}
-	else if (n == 126)
-	{
-		rotcam(env, 0, 0.1, 0);
-		camangle(env, 0, 0.1, 0);
-		raycaster(env);
-		mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
-	}
-	else if (n == 125)
-	{
-		rotcam(env, 0, -0.1, 0);
-		camangle(env, 0, -0.1, 0);
-		raycaster(env);
-		mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
-	}
-	return (0);
-}
 
 t_ray	init_ray(t_env *env)
 {
