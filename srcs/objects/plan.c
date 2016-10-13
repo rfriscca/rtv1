@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/04 14:53:23 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 13:29:12 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/13 13:32:16 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	create_plan(t_env *env, t_vector pos, t_color color, t_vector n)
 	obj->d1 = 0;
 	obj->d2 = 0;
 	obj->color = color;
+	obj->next = NULL;
 	if (env->obj == NULL)
 	{
 		obj->first = obj;
-		obj->next = NULL;
 		env->obj = obj;
 	}
 	else

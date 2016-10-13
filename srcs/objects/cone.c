@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 13:59:20 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 13:37:33 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/13 13:33:08 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	create_cone(t_env *env, t_parse data)
 	obj->d1 = 0;
 	obj->d2 = 0;
 	obj->color = data.color;
+	obj->next = NULL;
 	if (env->obj == NULL)
 	{
 		obj->first = obj;
-		obj->next = NULL;
 		env->obj = obj;
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 14:33:07 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 16:17:03 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/13 13:26:38 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void		parse_file(t_env *env)
 {
 	t_line	*file;
 
+	env->i = 0;
 	while (env->file)
 	{
 		if (!ft_strcmp(LINE, "camera"))
@@ -133,6 +134,8 @@ void		parse_file(t_env *env)
 			parse_cylinder(env);
 		else if (!ft_strcmp(LINE, "cone"))
 			parse_cone(env);
+		else
+			error(5);
 		if (env->file)
 		{
 			file = env->file->next;

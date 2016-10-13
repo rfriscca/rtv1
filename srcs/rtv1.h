@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 16:54:03 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/13 13:19:47 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ typedef struct		s_env
 	int				bits_per_pixel;
 	int				size_line;
 	int				endian;
+	int				i;
 	double			x;
 	double			y;
 	t_line			*file;

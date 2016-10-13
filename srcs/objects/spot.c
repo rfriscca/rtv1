@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 14:23:39 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 13:05:58 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/13 13:33:29 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,15 @@ void		create_spot(t_env *env, t_vector pos, t_color color)
 		error(1);
 	spot->spotpos = pos;
 	spot->color = color;
+	spot->next = NULL;
 	if (env->spot == NULL)
 	{
 		spot->first = spot;
-		spot->next = NULL;
 		env->spot = spot;
 	}
 	else
 	{
 		spot->first = env->spot->first;
-		spot->next = NULL;
 		while (env->spot->next)
 			env->spot = env->spot->next;
 		env->spot->next = spot;

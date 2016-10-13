@@ -1,9 +1,15 @@
-oaihfbjkask ds
-a>das
-342SA D3
-t(1,Dsalkdfjksadnfm,    aAdsdaD 0, -10)
-c(2sa55, DAS a2a55, 255)
-aDd d a
-	d ssdownsDae
-t(A1DS, sdsa0, 0)
-c(0, 1, 0)
+camera
+t(0, 0, -20)
+spot
+t(1, -4, -7)
+c(255, 0, 0)
+spot
+t(1, 4, -7)
+c(0, 0, 255)
+spot
+t(5, 0, -5)
+c(0, 255, 0)
+sphere
+t(1, 0, 0)
+plane
+t(-1, 0, 0)
