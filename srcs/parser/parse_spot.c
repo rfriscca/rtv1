@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 12:50:46 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 16:52:43 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/13 15:19:34 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	parse_spot(t_env *env)
 
 	color = default_color_spot();
 	pos = default_pos();
-	while (env->file->next && (LINENEXT[0] == 't' || LINENEXT[0] == 'c'))
+	while (env->file->next && (LINENEXT[0] == 't' || LINENEXT[0] == 'c')
+			&& !ft_isalpha(LINENEXT[1]))
 	{
 		file = env->file->next;
 		free_file(env);

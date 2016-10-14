@@ -1,15 +1,12 @@
 camera
 t0, 0, -20
-sphere
-t(1, 0, 0)
-plane
-plane
-t(0, 0, 4)
-r(0, 90, 0)
 spot
-t(2, -5, -10)
-spot
-t(2, 5, -10)
-
-
-
+t(1, 0, -10)
+cylinder
+t(0, 0, -2)
+cone
+t(0, 0, 1)
+r(0, 20, 20)
+cylinder
+r(0, 0, 90)
+t(0, 0, -3)

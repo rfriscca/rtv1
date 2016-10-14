@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/13 13:57:40 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/14 15:08:40 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # define NY env->obj->vec2.y
 # define NZ env->obj->vec2.z
 # define N env->obj->vec2
+# define OTN env->cam.ray.objtouched->vec2
 # define RS env->obj->r
 # define D1 env->obj->d1
 # define D2 env->obj->d2
@@ -159,6 +160,7 @@ typedef struct		s_env
 	int				i;
 	double			x;
 	double			y;
+	t_parse			data;
 	t_line			*file;
 	t_obj			*obj;
 	t_camera		cam;
@@ -213,6 +215,7 @@ t_vector			calc_vect(t_vector p1, t_vector p2);
 t_vector			ray_point(t_env *env);
 t_vector			calc_ncylinder(t_env *env);
 t_vector			calc_ncone(t_env *env);
+t_vector			inv_vect(t_vector vec);
 double				dotproduct(t_vector vec1, t_vector vec2);
 
 

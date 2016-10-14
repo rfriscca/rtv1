@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:47:36 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/12 16:22:01 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/14 13:19:26 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void	parse_cone(t_env *env)
 {
-	t_parse		data;
 	t_vector	trans;
 	t_line		*file;
 
-	data.pos = default_pos();
-	data.n = default_n();
-	data.color = default_color();
-	data.r = 0.5;
+	env->data.pos = default_pos();
+	env->data.n = default_n();
+	env->data.color = default_color();
+	env->data.r = 0.5;
 	while (env->file->next && (LINENEXT[0] == 'r' || LINENEXT[0] == 't'
-				|| LINENEXT[0] == 'o' || LINENEXT[0] == 'c'))
+				|| LINENEXT[0] == 'o' || LINENEXT[0] == 'c') &&
+			!ft_isalpha(LINENEXT[1]))
 	{
 		file = env->file->next;
 		free_file(env);
@@ -31,17 +31,17 @@ void	parse_cone(t_env *env)
 		if (LINE[0] == 't')
 		{
 			trans = get_vector(env);
-			data.pos = translation(data.pos, trans);
+			env->data.pos = translation(env->data.pos, trans);
 		}
 		else if (LINE[0] == 'r')
 		{
 			trans = get_vector(env);
-			data.n = rotvec(data.n, trans);
+			env->data.n = rotvec(env->data.n, trans);
 		}
 		else if (LINE[0] == 'c')
-			data.color = get_color(env);
+			env->data.color = get_color(env);
 		else if (LINE[0] == 'o')
-			data.r = ft_atof(LINE);
+			env->data.r = ft_atof(LINE);
 	}
-	create_cone(env, data);
+	create_cone(env, env->data);
 }
