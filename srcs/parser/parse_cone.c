@@ -6,15 +6,30 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:47:36 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/14 13:19:26 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/20 12:45:21 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	parse_cone(t_env *env)
+void	trans_rotation(t_env *env)
 {
 	t_vector	trans;
+
+	if (LINE[0] == 't')
+	{
+		trans = get_vector(env);
+		env->data.pos = translation(env->data.pos, trans);
+	}
+	else if (LINE[0] == 'r')
+	{
+		trans = get_vector(env);
+		env->data.n = rotvec(env->data.n, trans);
+	}
+}
+
+void	parse_cone(t_env *env)
+{
 	t_line		*file;
 
 	env->data.pos = default_pos();
@@ -28,16 +43,8 @@ void	parse_cone(t_env *env)
 		file = env->file->next;
 		free_file(env);
 		env->file = file;
-		if (LINE[0] == 't')
-		{
-			trans = get_vector(env);
-			env->data.pos = translation(env->data.pos, trans);
-		}
-		else if (LINE[0] == 'r')
-		{
-			trans = get_vector(env);
-			env->data.n = rotvec(env->data.n, trans);
-		}
+		if (LINE[0] == 't' || LINE[0] == 'r')
+			trans_rotation(env);
 		else if (LINE[0] == 'c')
 			env->data.color = get_color(env);
 		else if (LINE[0] == 'o')

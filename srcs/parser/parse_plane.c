@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:10:18 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/13 15:21:01 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/20 13:08:50 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,11 @@
 
 void	parse_plane(t_env *env)
 {
-	t_vector	pos;
-	t_vector	trans;
-	t_color		color;
-	t_vector	n;
 	t_line		*file;
 
-	pos = default_pos();
-	color = default_color();
-	n = default_n();
+	env->data.pos = default_pos();
+	env->data.color = default_color();
+	env->data.n = default_n();
 	while (env->file->next && (LINENEXT[0] == 't' || LINENEXT[0] == 'c'
 				|| LINENEXT[0] == 'r') && !ft_isalpha(LINENEXT[1]))
 	{
@@ -42,5 +38,5 @@ void	parse_plane(t_env *env)
 		else if (LINE[0] == 'c')
 			color = get_color(env);
 	}
-	create_plan(env, pos, color, n);
+	create_plan(env, env->data.pos, env->data.color, env->data.n);
 }

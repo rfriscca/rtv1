@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/14 15:08:40 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/20 13:06:35 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ t_color				default_color_spot(void);
 t_vector			default_pos(void);
 t_vector			default_n(void);
 void				free_file(t_env *env);
+int					gotonextvalue(t_env *env, int i);
 
 /*
 ** PARSER FUNCTIONS
@@ -247,6 +248,7 @@ int					test_cylinder2(t_env *env, t_vector pos, t_ray ray);
 void				create_cone(t_env *env, t_parse data);
 void				test_cone(t_env *env);
 int					test_cone2(t_env *env, t_vector pos, t_ray ray);
+void				trans_rotation(t_env *env);
 
 
 void				test_obj(t_env *env);
