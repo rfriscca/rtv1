@@ -6,20 +6,22 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:52:19 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/14 14:39:47 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/20 14:39:38 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void		init_spot(t_env *env, double x, double y, double z, t_color color)
+void		main_extension(t_env *env, int fd)
 {
-	t_vector	pos;
-
-	pos.x = x;
-	pos.y = y;
-	pos.z = z;
-	create_spot(env, pos, color);
+	env->file = save_file(fd);
+	env->obj = NULL;
+	env->spot = NULL;
+	parse_file(env);
+	if (env->obj == NULL)
+		error(6);
+	if (env->spot == NULL)
+		error(4);
 }
 
 int			main(int argc, char **argv)
@@ -34,14 +36,7 @@ int			main(int argc, char **argv)
 	if (argc != 2)
 		error(2);
 	fd = open(argv[1], O_RDONLY);
-	env->file = save_file(fd);
-	env->obj = NULL;
-	env->spot = NULL;
-	parse_file(env);
-	if (env->obj == NULL)
-		error(6);
-	if (env->spot == NULL)
-		error(4);
+	main_extension(env, fd);
 	env->mlx = mlx_init();
 	env->img = mlx_new_image(env->mlx, WIDTH, HEIGHT);
 	env->img_data = mlx_get_data_addr(env->img, &env->bits_per_pixel,

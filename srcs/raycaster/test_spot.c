@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 15:15:57 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/14 14:59:43 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/20 14:24:48 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	test_spot2(t_env *env)
 		RCOLOR = calc_color(env, OBJTOUCHED->color, env->spot->color, angle);
 	else
 		RCOLOR = calc_shadow(env, OBJTOUCHED->color, env->spot->color);
-
 }
 
 void	test_spot(t_env *env)

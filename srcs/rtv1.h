@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/20 13:06:35 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/20 14:37:35 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,6 @@
 # include <fcntl.h>
 # include "mlx.h"
 # include "libft.h"
-
-//test
-# include <stdio.h>
 
 typedef struct		s_vector
 {
@@ -170,7 +167,8 @@ typedef struct		s_env
 void				raycaster(t_env *env);
 void				mlx_pixel_put_img(t_env *env, t_color color);
 t_ray				init_ray(t_env *env);
-t_color				calc_color(t_env *env, t_color cobj, t_color clight, double angle);
+t_color				calc_color(t_env *env, t_color cobj, t_color clight,
+		double angle);
 t_color				calc_shadow(t_env *env, t_color cobj, t_color clight);
 t_color				extract_color(int color);
 int					event(int n, t_env *env);
@@ -187,11 +185,11 @@ int					gotonextvalue(t_env *env, int i);
 
 /*
 ** PARSER FUNCTIONS
-*/ 
+*/
 
 t_vector			get_vector(t_env *env);
 t_color				get_color(t_env *env);
-t_color				get_color_spot(t_env * env);
+t_color				get_color_spot(t_env *env);
 t_color				color_correc_spot(t_color color);
 t_color				color_correc_obj(t_color color);
 void				parse_camera(t_env *env);
@@ -219,7 +217,6 @@ t_vector			calc_ncone(t_env *env);
 t_vector			inv_vect(t_vector vec);
 double				dotproduct(t_vector vec1, t_vector vec2);
 
-
 /*
 ** CAMERA FUNCTIONS
 */
@@ -229,17 +226,18 @@ void				transcam(t_env *env, t_vector trans);
 void				rotcam(t_env *env, double rx, double ry, double rz);
 void				camangle(t_env *env, double rx, double ry, double rz);
 
-
 /*
 ** OBJECTS FUNCTIONS
 */
 
-void				create_sphere(t_env *env, t_vector pos, t_color color, double r);
+void				create_sphere(t_env *env, t_vector pos, t_color color,
+		double r);
 void				test_sphere(t_env *env);
 int					test_sphere2(t_env *env, t_vector pos, t_ray ray);
 void				create_spot(t_env *env, t_vector pos, t_color color);
 void				test_spot(t_env *env);
-void				create_plan(t_env *env, t_vector pos, t_color color, t_vector n);
+void				create_plan(t_env *env, t_vector pos, t_color color,
+		t_vector n);
 void				test_plan(t_env *env);
 int					test_plan2(t_env *env, t_vector pos, t_ray ray);
 void				create_cylinder(t_env *env, t_parse data);
@@ -249,8 +247,6 @@ void				create_cone(t_env *env, t_parse data);
 void				test_cone(t_env *env);
 int					test_cone2(t_env *env, t_vector pos, t_ray ray);
 void				trans_rotation(t_env *env);
-
-
 void				test_obj(t_env *env);
 
 #endif

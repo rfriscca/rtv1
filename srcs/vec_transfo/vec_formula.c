@@ -6,19 +6,11 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 14:06:46 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/14 15:09:33 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/20 14:34:49 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-double		dotproduct(t_vector vec1, t_vector vec2)
-{
-	double	res;
-
-	res = vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z;
-	return (res);
-}
 
 t_vector	ray_point(t_env *env)
 {

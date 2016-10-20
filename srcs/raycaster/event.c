@@ -6,21 +6,13 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 13:58:16 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/13 14:16:56 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/20 14:33:52 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_vector	inv_vect(t_vector vec)
-{
-	vec.x = -vec.x;
-	vec.y = -vec.y;
-	vec.z = -vec.z;
-	return (vec);
-}
-
-int		trans_event2(int n, t_env *env)
+int			trans_event2(int n, t_env *env)
 {
 	if (n == 15)
 	{
@@ -30,14 +22,20 @@ int		trans_event2(int n, t_env *env)
 	}
 	else if (n == 3)
 	{
-		transcam(env, inv_vect(env->cam.vecdirz));	
+		transcam(env, inv_vect(env->cam.vecdirz));
+		raycaster(env);
+		mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
+	}
+	else if (n == 1)
+	{
+		transcam(env, inv_vect(env->cam.vecdirx));
 		raycaster(env);
 		mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 	}
 	return (0);
 }
 
-int		trans_event(int n, t_env *env)
+int			trans_event(int n, t_env *env)
 {
 	if (n == 0)
 	{
@@ -57,18 +55,12 @@ int		trans_event(int n, t_env *env)
 		raycaster(env);
 		mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 	}
-	else if (n == 1)
-	{
-		transcam(env, inv_vect(env->cam.vecdirx));
-		raycaster(env);
-		mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
-	}
 	else
 		trans_event2(n, env);
 	return (0);
 }
 
-int		event2(int n, t_env *env)
+int			event2(int n, t_env *env)
 {
 	if (n == 125)
 	{
@@ -94,7 +86,15 @@ int		event2(int n, t_env *env)
 	return (0);
 }
 
-int		event(int n, t_env *env)
+void		event3(t_env *env)
+{
+	rotcam(env, 0, 0.1, 0);
+	camangle(env, 0, 0.1, 0);
+	raycaster(env);
+	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
+}
+
+int			event(int n, t_env *env)
 {
 	if (n == 53)
 		exit(1);
@@ -113,13 +113,8 @@ int		event(int n, t_env *env)
 		mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 	}
 	else if (n == 126)
-	{
-		rotcam(env, 0, 0.1, 0);
-		camangle(env, 0, 0.1, 0);
-		raycaster(env);
-		mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
-	}
-	else if (n >=0 && n <= 15)
+		event3(env);
+	else if (n >= 0 && n <= 15)
 		trans_event(n, env);
 	else
 		event2(n, env);

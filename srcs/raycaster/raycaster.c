@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:22:46 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/13 13:59:25 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/20 13:33:30 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ t_ray	init_ray(t_env *env)
 	double	y;
 	double	z;
 
-	x = VPUL.x + env->VDYX * env->y * YINDENT - env->VDXX * env->x * XINDENT - CAMPOSX;
-	y = VPUL.y + env->VDYY * env->y * YINDENT - env->VDXY * env->x * XINDENT - CAMPOSY;
-	z = VPUL.z + env->VDYZ * env->y * YINDENT - env->VDXZ * env->x * XINDENT - CAMPOSZ;
+	x = VPUL.x + env->VDYX * env->y * YINDENT -
+		env->VDXX * env->x * XINDENT - CAMPOSX;
+	y = VPUL.y + env->VDYY * env->y * YINDENT -
+		env->VDXY * env->x * XINDENT - CAMPOSY;
+	z = VPUL.z + env->VDYZ * env->y * YINDENT -
+		env->VDXZ * env->x * XINDENT - CAMPOSZ;
 	ray.vecdir.x = x / sqrt(x * x + y * y + z * z);
 	ray.vecdir.y = y / sqrt(x * x + y * y + z * z);
 	ray.vecdir.z = z / sqrt(x * x + y * y + z * z);
