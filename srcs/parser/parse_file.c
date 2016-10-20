@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 14:33:07 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/20 13:05:50 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/20 14:55:55 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ t_vector	get_vector(t_env *env)
 			v.y = ft_atof(LINE + i);
 			i = gotonextvalue(env, i);
 			v.z = ft_atof(LINE + i);
+			while (LINE[i] && LINE[i] != ')')
+				++i;
 		}
 		++i;
 	}
@@ -48,6 +50,8 @@ t_color		get_color(t_env *env)
 			c.g = ft_atof(LINE + i);
 			i = gotonextvalue(env, i);
 			c.b = ft_atof(LINE + i);
+			while (LINE[i] && LINE[i] != ')')
+				++i;
 		}
 		++i;
 	}
@@ -70,6 +74,8 @@ t_color		get_color_spot(t_env *env)
 			c.g = ft_atof(LINE + i);
 			i = gotonextvalue(env, i);
 			c.b = ft_atof(LINE + i);
+			while (LINE[i] && LINE[i] != ')')
+				++i;
 		}
 		++i;
 	}

@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 12:45:49 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/20 13:10:02 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/20 14:44:27 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void	parse_sphere(t_env *env)
 		if (LINE[0] == 't')
 		{
 			trans = get_vector(env);
-			pos = translation(pos, trans);
+			env->data.pos = translation(env->data.pos, trans);
 		}
 		else if (LINE[0] == 'c')
-			color = get_color(env);
+			env->data.color = get_color(env);
 		else if (LINE[0] == 'o')
-			r = ft_atof(LINE);
+			env->data.r = ft_atof(LINE);
 	}
 	create_sphere(env, env->data.pos, env->data.color, env->data.r);
 }

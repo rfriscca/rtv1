@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:10:18 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/20 13:08:50 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/20 14:43:50 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,10 @@ void	parse_plane(t_env *env)
 		file = env->file->next;
 		free_file(env);
 		env->file = file;
-		if (LINE[0] == 't')
-		{
-			trans = get_vector(env);
-			pos = translation(pos, trans);
-		}
-		else if (LINE[0] == 'r')
-		{
-			trans = get_vector(env);
-			n = rotvec(n, trans);
-		}
+		if (LINE[0] == 't' || LINE[0] == 'r')
+			trans_rotation(env);
 		else if (LINE[0] == 'c')
-			color = get_color(env);
+			env->data.color = get_color(env);
 	}
 	create_plan(env, env->data.pos, env->data.color, env->data.n);
 }
