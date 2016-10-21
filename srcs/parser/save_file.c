@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 12:20:10 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/20 14:58:34 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/21 14:47:48 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,11 @@ t_line	*save_file(int fd)
 	char	*line;
 	int		i;
 
+	file_start = NULL;
 	i = 0;
 	if ((ret = get_next_line(fd, &line)) == -1)
 		error(3);
-	if (ret <= 0 || (file_start = ft_new_line(line, ft_strlen(line))) == NULL)
+	if ((file_start = ft_new_line(line, ft_strlen(line))) == NULL)
 		error(3);
 	file = file_start;
 	ret = get_next_line(fd, &line);

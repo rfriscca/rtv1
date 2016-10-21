@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 15:15:57 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/20 14:24:48 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/21 14:51:26 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	test_spot2(t_env *env)
 	t_vector	vec_ctoo;
 	double		angle;
 
+	vec_ctoo = default_n();
 	point = ray_point(env);
 	if (OBJTOUCHED->type == 's')
 		vec_ctoo = normalize_vec(calc_vect(OBJTOUCHED->vec1, point));

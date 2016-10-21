@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:52:19 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/20 14:39:38 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/10/21 14:34:32 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void		main_extension(t_env *env, int fd)
 int			main(int argc, char **argv)
 {
 	t_env		*env;
-	t_color		color;
-	t_vector	pos;
 	int			fd;
 
 	if ((env = (t_env*)malloc(sizeof(t_env))) == NULL)
