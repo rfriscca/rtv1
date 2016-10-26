@@ -6,7 +6,7 @@
 #    By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/21 13:24:06 by rfriscca          #+#    #+#              #
-#    Updated: 2016/10/21 14:46:14 by rfriscca         ###   ########.fr        #
+#    Updated: 2016/10/26 12:51:36 by rfriscca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,7 @@ clean :
 
 fclean : clean
 	rm -f $(NAME)
-	make -C $(LIBFT_DIR) fclea
+	make -C $(LIBFT_DIR) fclean
 
 re : fclean all
 

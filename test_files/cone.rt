@@ -1,6 +1,0 @@
-camera
-t0,0,-20
-spot
-t(1, 0, -10)
-cylinder
-o0.3
