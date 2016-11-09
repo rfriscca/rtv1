@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 15:15:57 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/21 14:51:26 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/11/09 14:26:12 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	test_spot2(t_env *env)
 	else if (OBJTOUCHED->type == 'k')
 		vec_ctoo = normalize_vec(calc_ncone(env));
 	vec_ltoo = normalize_vec(calc_vect(env->spot->spotpos, point));
+	REFLECT = normalize_vec(reflect_vect(vec_ltoo, vec_ctoo));
 	vec_otol = normalize_vec(calc_vect(point, env->spot->spotpos));
 	angle = dotproduct(vec_otol, vec_ctoo);
 	env->spot->ray = init_lightray(env, vec_otol, point);

@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/21 15:02:00 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/11/09 14:28:16 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define VPHEIGHT 7.2
 # define VPDIST 20
 # define PI 3.14159265
+# define SPEC 50
 
 /*
 ** FOV = atan(VPWIDTH / 2 / VPDIST)
@@ -51,6 +52,7 @@
 # define RS env->obj->r
 # define D1 env->obj->d1
 # define D2 env->obj->d2
+# define REFLECT env->cam.ray.reflect
 
 /*
 **  define vec dir camera
@@ -119,6 +121,7 @@ typedef struct		s_parse
 typedef struct		s_ray
 {
 	t_vector		vecdir;
+	t_vector		reflect;
 	t_obj			*objtouched;
 	double			dist;
 	t_color			color;
@@ -127,7 +130,7 @@ typedef struct		s_ray
 typedef struct		s_camera
 {
 	t_vector		campos;
-	t_ray			ray;
+	t_ray			ray;;
 	t_vector		vecdirx;
 	t_vector		vecdiry;
 	t_vector		vecdirz;
@@ -215,6 +218,7 @@ t_vector			ray_point(t_env *env);
 t_vector			calc_ncylinder(t_env *env);
 t_vector			calc_ncone(t_env *env);
 t_vector			inv_vect(t_vector vec);
+t_vector			reflect_vect(t_vector dir, t_vector n);
 double				dotproduct(t_vector vec1, t_vector vec2);
 
 /*

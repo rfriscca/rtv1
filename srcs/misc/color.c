@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 16:13:22 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/14 13:41:27 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/11/09 14:31:05 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,20 @@ t_color		calc_shadow(t_env *env, t_color cobj, t_color clight)
 t_color		calc_color(t_env *env, t_color cobj, t_color clight, double angle)
 {
 	t_color		color;
+	double		x;
 
+	x = dotproduct(VDIR, REFLECT);
 	if (angle > 0.15)
 	{
-		color.r = (cobj.r * clight.r * angle);
-		color.g = (cobj.g * clight.g * angle);
-		color.b = (cobj.b * clight.b * angle);
+		color.r = (cobj.r * clight.r * angle) + clight.r * pow(x, SPEC);
+		if (color.r > 255)
+			color.r = 255;
+		color.g = (cobj.g * clight.g * angle) + clight.g * pow(x, SPEC);
+		if (color.g > 255)
+			color.g = 255;
+		color.b = (cobj.b * clight.b * angle) + clight.b * pow(x, SPEC);
+		if (color.b > 255)
+			color.b = 255;
 	}
 	else
 		color = calc_shadow(env, cobj, clight);

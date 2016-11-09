@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 14:29:45 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/20 14:34:56 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/11/09 14:22:59 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@ double		dotproduct(t_vector vec1, t_vector vec2)
 
 	res = vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z;
 	return (res);
+}
+
+t_vector	reflect_vect(t_vector dir, t_vector n)
+{
+	t_vector	reflect;
+
+	reflect.x = dir.x - 2 * dotproduct(dir, n) * n.x;
+	reflect.y = dir.y - 2 * dotproduct(dir, n) * n.y;
+	reflect.z = dir.z - 2 * dotproduct(dir, n) * n.z;
+	return (reflect);
 }
 
 t_vector	inv_vect(t_vector vec)
