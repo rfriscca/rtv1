@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/11/09 14:28:16 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/11/09 16:00:17 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@
 # define VPDIST 20
 # define PI 3.14159265
 # define SPEC 50
+# define KD 0.6
+# define KS 0.2
+# define KA 0.2
+# define RA 255
+# define GA 255
+# define BA 255
 
 /*
 ** FOV = atan(VPWIDTH / 2 / VPDIST)
@@ -172,7 +178,7 @@ void				mlx_pixel_put_img(t_env *env, t_color color);
 t_ray				init_ray(t_env *env);
 t_color				calc_color(t_env *env, t_color cobj, t_color clight,
 		double angle);
-t_color				calc_shadow(t_env *env, t_color cobj, t_color clight);
+t_color				calc_shadow(t_env *env, t_color cobj);
 t_color				extract_color(int color);
 int					event(int n, t_env *env);
 void				error(int n);
