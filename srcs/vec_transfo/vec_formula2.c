@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 14:29:45 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/11/09 14:22:59 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/12/08 12:55:16 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,26 @@ t_vector	reflect_vect(t_vector dir, t_vector n)
 	reflect.y = dir.y - 2 * dotproduct(dir, n) * n.y;
 	reflect.z = dir.z - 2 * dotproduct(dir, n) * n.z;
 	return (reflect);
+}
+
+t_vector	mult_vect(t_vector v, double mult)
+{
+	t_vector	w;
+
+	w.x = v.x * mult;
+	w.y = v.y * mult;
+	w.z = v.z * mult;
+	return (w);
+}
+
+t_vector	sub_vect(t_vector v, t_vector w)
+{
+	t_vector	z;
+
+	z.x = v.x - w.x;
+	z.y = v.y - w.y;
+	z.z = v.z - w.z;
+	return (z);
 }
 
 t_vector	inv_vect(t_vector vec)

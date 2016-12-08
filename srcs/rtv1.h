@@ -6,14 +6,15 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/11/09 16:00:17 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/12/08 13:04:31 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RTV1_H
 # define RTV1_H
-# define WIDTH 1000
-# define HEIGHT 720
+
+# define WIDTH 640
+# define HEIGHT 480
 # define VPWIDTH 10.0
 # define VPHEIGHT 7.2
 # define VPDIST 20
@@ -225,6 +226,8 @@ t_vector			calc_ncylinder(t_env *env);
 t_vector			calc_ncone(t_env *env);
 t_vector			inv_vect(t_vector vec);
 t_vector			reflect_vect(t_vector dir, t_vector n);
+t_vector			sub_vect(t_vector v, t_vector w);
+t_vector			mult_vect(t_vector v, double mult);
 double				dotproduct(t_vector vec1, t_vector vec2);
 
 /*

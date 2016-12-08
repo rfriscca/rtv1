@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 13:59:20 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/13 15:48:00 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/12/07 15:27:12 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	test_cone(t_env *env)
 			RDIST = D1;
 			OBJTOUCHED = env->obj;
 		}
-		if ((D2 = (-b + sqrt(det)) / (2 * a)) > 0 && D1 < RDIST)
+		if ((D2 = (-b + sqrt(det)) / (2 * a)) > 0 && D2 < RDIST)
 		{
 			RDIST = D2;
 			OBJTOUCHED = env->obj;

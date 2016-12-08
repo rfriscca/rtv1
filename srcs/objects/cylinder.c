@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 13:57:47 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/14 12:56:09 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/12/08 13:03:53 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	create_cylinder(t_env *env, t_parse data)
 		error(1);
 	obj->type = 'c';
 	obj->vec1 = data.pos;
-	obj->vec2 = data.n;
+	obj->vec2 = inv_vect(data.n);
 	obj->r = data.r;
 	obj->d1 = 0;
 	obj->d2 = 0;
@@ -57,7 +57,7 @@ void	test_cylinder(t_env *env)
 	det = b * b - 4 * a * c;
 	if (det >= 0)
 	{
-		if ((D1 = (-b + sqrt(det) / (2 * a))) > 0 && D1 < RDIST)
+		if ((D1 = (-b + sqrt(det)) / (2 * a)) > 0 && D1 < RDIST)
 		{
 			RDIST = D1;
 			OBJTOUCHED = env->obj;
