@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/04 14:53:23 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/14 12:56:05 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/12/12 12:39:54 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,6 @@ int		test_plan2(t_env *env, t_vector pos, t_ray ray)
 	double		dist;
 	t_vector	x;
 
-	if (dotproduct(env->cam.vecdirz, env->obj->vec2) > 0)
-	{
-		env->obj->vec2.x = -env->obj->vec2.x;
-		env->obj->vec2.y = -env->obj->vec2.y;
-		env->obj->vec2.z = -env->obj->vec2.z;
-	}
 	x = calc_vect(POS, pos);
 	dist = -dotproduct(x, N) / dotproduct(ray.vecdir, N);
 	if (dist > 0.01 && dist < ray.dist)
