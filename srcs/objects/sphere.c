@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 12:17:11 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/13 13:32:33 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/12/15 14:51:37 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	create_sphere(t_env *env, t_vector pos, t_color color, double r)
 	obj->vec1 = pos;
 	obj->vec2 = pos;
 	obj->r = r;
+	obj->reflect = 0;
 	obj->d1 = 0;
 	obj->d2 = 0;
 	obj->color = color;
@@ -41,7 +42,7 @@ void	create_sphere(t_env *env, t_vector pos, t_color color, double r)
 	env->obj = env->obj->first;
 }
 
-void	test_sphere(t_env *env)
+t_obj	*test_sphere(t_env *env, t_ray *ray)
 {
 	double		a;
 	double		b;
@@ -49,24 +50,25 @@ void	test_sphere(t_env *env)
 	t_vector	x;
 	double		det;
 
-	x = calc_vect(POS, CAMPOS);
+	x = calc_vect(POS, ray->pos);
 	a = dotproduct(VDIR, VDIR);
 	b = 2 * (dotproduct(VDIR, x));
 	c = dotproduct(x, x) - RS * RS;
 	det = b * b - 4 * a * c;
 	if (det >= 0)
 	{
-		if ((D1 = (-b + sqrt(det)) / (2 * a)) > 0 && D1 < RDIST)
+		if ((D1 = (-b + sqrt(det)) / (2 * a)) > EPS && D1 < RDIST)
 		{
 			RDIST = D1;
-			OBJTOUCHED = env->obj;
+			return (env->obj);
 		}
-		if ((D2 = (-b - sqrt(det)) / (2 * a)) > 0 && D2 < RDIST)
+		if ((D2 = (-b - sqrt(det)) / (2 * a)) > EPS && D2 < RDIST)
 		{
 			RDIST = D2;
-			OBJTOUCHED = env->obj;
+			return (env->obj);
 		}
 	}
+	return (NULL);
 }
 
 int		test_sphere2(t_env *env, t_vector pos, t_ray ray)
@@ -84,9 +86,9 @@ int		test_sphere2(t_env *env, t_vector pos, t_ray ray)
 	det = b * b - 4 * a * c;
 	if (det >= 0)
 	{
-		if ((D1 = (-b + sqrt(det)) / (2 * a)) > 0.01 && D1 < ray.dist)
+		if ((D1 = (-b + sqrt(det)) / (2 * a)) > EPS && D1 < ray.dist)
 			return (1);
-		if ((D2 = (-b - sqrt(det)) / (2 * a)) > 0.01 && D2 < ray.dist)
+		if ((D2 = (-b - sqrt(det)) / (2 * a)) > EPS && D2 < ray.dist)
 			return (1);
 	}
 	return (0);

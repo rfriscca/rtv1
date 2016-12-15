@@ -6,21 +6,11 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 14:06:46 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/10/20 14:34:49 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/12/15 15:26:09 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-t_vector	ray_point(t_env *env)
-{
-	t_vector	point;
-
-	point.x = VDIRX * RDIST + CAMPOSX;
-	point.y = VDIRY * RDIST + CAMPOSY;
-	point.z = VDIRZ * RDIST + CAMPOSZ;
-	return (point);
-}
 
 t_vector	calc_vect(t_vector p1, t_vector p2)
 {
@@ -32,34 +22,34 @@ t_vector	calc_vect(t_vector p1, t_vector p2)
 	return (new);
 }
 
-t_vector	calc_ncylinder(t_env *env)
+t_vector	calc_ncylinder(t_ray *ray, t_obj *obj)
 {
 	t_vector	n;
 	double		m;
 	t_vector	x;
 
-	x = calc_vect(OBJTOUCHED->vec1, CAMPOS);
-	m = dotproduct(VDIR, OTN) * RDIST + dotproduct(x, OTN);
-	n.x = (VDIRX * RDIST + CAMPOSX) - OBJTOUCHED->vec1.x - OTN.x * m;
-	n.y = (VDIRY * RDIST + CAMPOSY) - OBJTOUCHED->vec1.y - OTN.y * m;
-	n.z = (VDIRZ * RDIST + CAMPOSZ) - OBJTOUCHED->vec1.z - OTN.z * m;
+	x = calc_vect(obj->vec1, ray->pos);
+	m = dotproduct(VDIR, obj->vec2) * RDIST + dotproduct(x, obj->vec2);
+	n.x = (VDIR.x * RDIST + ray->pos.x) - obj->vec1.x - obj->vec2.x * m;
+	n.y = (VDIR.y * RDIST + ray->pos.y) - obj->vec1.y - obj->vec2.y * m;
+	n.z = (VDIR.z * RDIST + ray->pos.z) - obj->vec1.z - obj->vec2.z * m;
 	return (n);
 }
 
-t_vector	calc_ncone(t_env *env)
+t_vector	calc_ncone(t_ray *ray, t_obj *obj)
 {
 	t_vector	n;
 	double		m;
 	t_vector	x;
 
-	x = calc_vect(OBJTOUCHED->vec1, CAMPOS);
-	m = dotproduct(VDIR, OTN) * RDIST + dotproduct(x, OTN);
-	n.x = (VDIRX * RDIST + CAMPOSX) - OBJTOUCHED->vec1.x -
-		(1 + OBJTOUCHED->r * OBJTOUCHED->r) * OTN.x * m;
-	n.y = (VDIRY * RDIST + CAMPOSY) - OBJTOUCHED->vec1.y -
-		(1 + OBJTOUCHED->r * OBJTOUCHED->r) * OTN.y * m;
-	n.z = (VDIRZ * RDIST + CAMPOSZ) - OBJTOUCHED->vec1.z -
-		(1 + OBJTOUCHED->r * OBJTOUCHED->r) * OTN.z * m;
+	x = calc_vect(obj->vec1, ray->pos);
+	m = dotproduct(VDIR, obj->vec2) * RDIST + dotproduct(x, obj->vec2);
+	n.x = (VDIR.x * RDIST + ray->pos.x) - obj->vec1.x -
+		(1 + obj->r * obj->r) * obj->vec2.x * m;
+	n.y = (VDIR.y * RDIST + ray->pos.y) - obj->vec1.y -
+		(1 + obj->r * obj->r) * obj->vec2.y * m;
+	n.z = (VDIR.z * RDIST + ray->pos.z) - obj->vec1.z -
+		(1 + obj->r * obj->r) * obj->vec2.z * m;
 	return (n);
 }
 

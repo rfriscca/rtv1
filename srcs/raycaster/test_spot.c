@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 15:15:57 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/11/09 16:00:35 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/12/15 15:07:01 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,42 +61,44 @@ t_ray	init_lightray(t_env *env, t_vector vec, t_vector point)
 	return (ray);
 }
 
-void	test_spot2(t_env *env)
+t_color	test_spot2(t_env *env, t_ray *ray, t_obj *obj, t_vector point)
 {
-	t_vector	point;
 	t_vector	vec_ltoo;
 	t_vector	vec_otol;
 	t_vector	vec_ctoo;
 	double		angle;
 
 	vec_ctoo = default_n();
-	point = ray_point(env);
-	if (OBJTOUCHED->type == 's')
-		vec_ctoo = normalize_vec(calc_vect(OBJTOUCHED->vec1, point));
-	else if (OBJTOUCHED->type == 'p')
-		vec_ctoo = OBJTOUCHED->vec2;
-	else if (OBJTOUCHED->type == 'c')
-		vec_ctoo = normalize_vec(calc_ncylinder(env));
-	else if (OBJTOUCHED->type == 'k')
-		vec_ctoo = normalize_vec(calc_ncone(env));
+	if (obj->type == 's')
+		vec_ctoo = normalize_vec(calc_vect(obj->vec1, point));
+	else if (obj->type == 'p')
+		vec_ctoo = obj->vec2;
+	else if (obj->type == 'c')
+		vec_ctoo = normalize_vec(calc_ncylinder(ray, obj));
+	else if (obj->type == 'k')
+		vec_ctoo = normalize_vec(calc_ncone(ray, obj));
 	vec_ltoo = normalize_vec(calc_vect(env->spot->spotpos, point));
 	REFLECT = normalize_vec(reflect_vect(vec_ltoo, vec_ctoo));
 	vec_otol = normalize_vec(calc_vect(point, env->spot->spotpos));
 	angle = dotproduct(vec_otol, vec_ctoo);
 	env->spot->ray = init_lightray(env, vec_otol, point);
 	if (lightcaster(env, point, env->spot->ray, env->obj) == 0)
-		RCOLOR = calc_color(env, OBJTOUCHED->color, env->spot->color, angle);
+		return (RCOLOR = calc_color(ray, obj->color, env->spot->color, angle));
 	else
-		RCOLOR = calc_shadow(env, OBJTOUCHED->color);
+		return (RCOLOR = calc_shadow(ray, obj->color));
 }
 
-void	test_spot(t_env *env)
+t_color	test_spot(t_env *env, t_ray *ray, t_obj *obj, t_vector point)
 {
+	t_color	color;
+
+	color = init_color_black();
 	while (env->spot->next)
 	{
-		test_spot2(env);
+		color = test_spot2(env, ray, obj, point);
 		env->spot = env->spot->next;
 	}
-	test_spot2(env);
+	color = test_spot2(env, ray, obj, point);
 	env->spot = env->spot->first;
+	return (color);
 }

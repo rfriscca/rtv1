@@ -6,13 +6,14 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/12/08 13:04:31 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/12/15 14:53:08 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RTV1_H
 # define RTV1_H
 
+# define EPS 0.01
 # define WIDTH 640
 # define HEIGHT 480
 # define VPWIDTH 10.0
@@ -26,6 +27,7 @@
 # define RA 255
 # define GA 255
 # define BA 255
+# define MAX_DEPTH 5
 
 /*
 ** FOV = atan(VPWIDTH / 2 / VPDIST)
@@ -39,13 +41,6 @@
 # define XINDENT env->cam.xindent
 # define YINDENT env->cam.yindent
 # define VPUL env->cam.vpul
-# define VDIR env->cam.ray.vecdir
-# define VDIRX env->cam.ray.vecdir.x
-# define VDIRY env->cam.ray.vecdir.y
-# define VDIRZ env->cam.ray.vecdir.z
-# define RDIST env->cam.ray.dist
-# define OBJTOUCHED env->cam.ray.objtouched
-# define RCOLOR env->cam.ray.color
 # define OBJCOLOR env->obj->color
 # define XS env->obj->vec1.x
 # define YS env->obj->vec1.y
@@ -55,11 +50,18 @@
 # define NY env->obj->vec2.y
 # define NZ env->obj->vec2.z
 # define N env->obj->vec2
-# define OTN env->cam.ray.objtouched->vec2
 # define RS env->obj->r
 # define D1 env->obj->d1
 # define D2 env->obj->d2
-# define REFLECT env->cam.ray.reflect
+
+/*
+** ray define
+*/
+
+# define RCOLOR ray->color
+# define VDIR ray->vecdir
+# define RDIST ray->dist
+# define REFLECT ray->reflect
 
 /*
 **  define vec dir camera
@@ -109,6 +111,7 @@ typedef struct		s_obj
 	char			type;
 	t_vector		vec1;
 	t_vector		vec2;
+	int				reflect;
 	double			r;
 	double			d1;
 	double			d2;
@@ -128,8 +131,8 @@ typedef struct		s_parse
 typedef struct		s_ray
 {
 	t_vector		vecdir;
+	t_vector		pos;
 	t_vector		reflect;
-	t_obj			*objtouched;
 	double			dist;
 	t_color			color;
 }					t_ray;
@@ -137,7 +140,6 @@ typedef struct		s_ray
 typedef struct		s_camera
 {
 	t_vector		campos;
-	t_ray			ray;;
 	t_vector		vecdirx;
 	t_vector		vecdiry;
 	t_vector		vecdirz;
@@ -175,11 +177,14 @@ typedef struct		s_env
 }					t_env;
 
 void				raycaster(t_env *env);
+t_color				trace(t_env *env, t_ray *ray, int i);
+int					lightcaster(t_env *env, t_vector pos, t_ray ray, t_obj *obj);
+void				reflect(t_env *env, int i);
 void				mlx_pixel_put_img(t_env *env, t_color color);
 t_ray				init_ray(t_env *env);
-t_color				calc_color(t_env *env, t_color cobj, t_color clight,
+t_color				calc_color(t_ray *ray, t_color cobj, t_color clight,
 		double angle);
-t_color				calc_shadow(t_env *env, t_color cobj);
+t_color				calc_shadow(t_ray *ray, t_color cobj);
 t_color				extract_color(int color);
 int					event(int n, t_env *env);
 void				error(int n);
@@ -192,6 +197,7 @@ t_vector			default_pos(void);
 t_vector			default_n(void);
 void				free_file(t_env *env);
 int					gotonextvalue(t_env *env, int i);
+t_color				init_color_black(void);
 
 /*
 ** PARSER FUNCTIONS
@@ -222,8 +228,9 @@ t_vector			translation(t_vector vec, t_vector translation);
 t_vector			normalize_vec(t_vector vec);
 t_vector			calc_vect(t_vector p1, t_vector p2);
 t_vector			ray_point(t_env *env);
-t_vector			calc_ncylinder(t_env *env);
-t_vector			calc_ncone(t_env *env);
+t_vector			ray_point_reflect(t_env *env);
+t_vector			calc_ncylinder(t_ray *ray, t_obj *obj);
+t_vector			calc_ncone(t_ray *ray, t_obj *obj);
 t_vector			inv_vect(t_vector vec);
 t_vector			reflect_vect(t_vector dir, t_vector n);
 t_vector			sub_vect(t_vector v, t_vector w);
@@ -245,21 +252,26 @@ void				camangle(t_env *env, double rx, double ry, double rz);
 
 void				create_sphere(t_env *env, t_vector pos, t_color color,
 		double r);
-void				test_sphere(t_env *env);
+t_obj				*test_sphere(t_env *env, t_ray *ray);
 int					test_sphere2(t_env *env, t_vector pos, t_ray ray);
+int					test_sphere3(t_env *env, t_vector pos);
 void				create_spot(t_env *env, t_vector pos, t_color color);
-void				test_spot(t_env *env);
+t_color				test_spot(t_env *env, t_ray *ray, t_obj *obj,
+		t_vector point);
 void				create_plan(t_env *env, t_vector pos, t_color color,
 		t_vector n);
-void				test_plan(t_env *env);
+t_obj				*test_plan(t_env *env, t_ray *ray);
 int					test_plan2(t_env *env, t_vector pos, t_ray ray);
+int					test_plan3(t_env *env, t_vector pos);
 void				create_cylinder(t_env *env, t_parse data);
-void				test_cylinder(t_env *env);
+t_obj				*test_cylinder(t_env *env, t_ray *ray);
 int					test_cylinder2(t_env *env, t_vector pos, t_ray ray);
+int					test_cylinder3(t_env *env, t_vector pos);
 void				create_cone(t_env *env, t_parse data);
-void				test_cone(t_env *env);
+t_obj				*test_cone(t_env *env, t_ray *ray);
 int					test_cone2(t_env *env, t_vector pos, t_ray ray);
+int					test_cone3(t_env *env, t_vector pos);
 void				trans_rotation(t_env *env);
-void				test_obj(t_env *env);
+t_obj				*test_obj(t_env *env, t_ray *ray);
 
 #endif

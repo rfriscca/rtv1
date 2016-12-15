@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:22:46 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/12/07 15:24:56 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/12/15 15:20:05 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,33 +25,44 @@ t_ray	init_ray(t_env *env)
 		env->VDXY * env->x * XINDENT - CAMPOSY;
 	z = VPUL.z + env->VDYZ * env->y * YINDENT -
 		env->VDXZ * env->x * XINDENT - CAMPOSZ;
+	ray.pos = CAMPOS;
 	ray.vecdir.x = x / sqrt(x * x + y * y + z * z);
 	ray.vecdir.y = y / sqrt(x * x + y * y + z * z);
 	ray.vecdir.z = z / sqrt(x * x + y * y + z * z);
 	ray.dist = 1000000;
-	ray.color.r = 0;
-	ray.color.g = 0;
-	ray.color.b = 0;
-	ray.objtouched = NULL;
 	return (ray);
+}
+
+t_color	init_color_black(void)
+{
+	t_color	color;
+
+	color.r = 0;
+	color.g = 0;
+	color.b = 0;
+	return (color);
 }
 
 void	raycaster(t_env *env)
 {
+	t_ray	*ray;
+	t_color	color;
+
+	ray = (t_ray*)malloc(sizeof(t_ray));
+	color = init_color_black();
 	env->y = 0;
 	env->x = 0;
 	while (env->x < HEIGHT)
 	{
 		while (env->y < WIDTH)
 		{
-			env->cam.ray = init_ray(env);
-			test_obj(env);
-			if (OBJTOUCHED)
-				test_spot(env);
-			mlx_pixel_put_img(env, RCOLOR);
+			*ray = init_ray(env);
+			color = trace(env, ray, 0);
+			mlx_pixel_put_img(env, color);
 			++env->y;
 		}
 		env->y = 0;
 		++env->x;
 	}
+	free(ray);
 }

@@ -6,7 +6,7 @@
 #    By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/21 13:24:06 by rfriscca          #+#    #+#              #
-#    Updated: 2016/10/26 12:51:36 by rfriscca         ###   ########.fr        #
+#    Updated: 2016/12/15 14:45:11 by rfriscca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ PARSER = color_correction.c		\
 RAYCASTER = event.c			\
 			raycaster.c		\
 			test_obj.c		\
-			test_spot.c
+			test_spot.c		\
+			trace.c
 VEC = rotation.c		\
 	  translation.c		\
 	  vec_formula.c		\

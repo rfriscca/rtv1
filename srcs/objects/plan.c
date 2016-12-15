@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/04 14:53:23 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/12/12 12:39:54 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/12/15 14:51:55 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	create_plan(t_env *env, t_vector pos, t_color color, t_vector n)
 	obj->vec1 = pos;
 	obj->vec2 = n;
 	obj->r = 0;
+	obj->reflect = 1;
 	obj->d1 = 0;
 	obj->d2 = 0;
 	obj->color = color;
@@ -41,18 +42,19 @@ void	create_plan(t_env *env, t_vector pos, t_color color, t_vector n)
 	env->obj = env->obj->first;
 }
 
-void	test_plan(t_env *env)
+t_obj	*test_plan(t_env *env, t_ray *ray)
 {
 	double		dist;
 	t_vector	x;
 
-	x = calc_vect(POS, CAMPOS);
+	x = calc_vect(POS, ray->pos);
 	dist = -dotproduct(x, N) / dotproduct(VDIR, N);
-	if (dist > 0 && dist < RDIST)
+	if (dist > EPS && dist < RDIST)
 	{
 		RDIST = dist;
-		OBJTOUCHED = env->obj;
+		return (env->obj);
 	}
+	return (NULL);
 }
 
 int		test_plan2(t_env *env, t_vector pos, t_ray ray)
@@ -62,7 +64,7 @@ int		test_plan2(t_env *env, t_vector pos, t_ray ray)
 
 	x = calc_vect(POS, pos);
 	dist = -dotproduct(x, N) / dotproduct(ray.vecdir, N);
-	if (dist > 0.01 && dist < ray.dist)
+	if (dist > EPS && dist < ray.dist)
 		return (1);
 	return (0);
 }

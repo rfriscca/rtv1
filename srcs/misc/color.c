@@ -6,13 +6,13 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 16:13:22 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/11/09 16:00:04 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/12/15 14:42:11 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_color		calc_shadow(t_env *env, t_color cobj)
+t_color		calc_shadow(t_ray *ray, t_color cobj)
 {
 	t_color		color;
 
@@ -28,7 +28,7 @@ t_color		calc_shadow(t_env *env, t_color cobj)
 	return (color);
 }
 
-t_color		calc_color(t_env *env, t_color cobj, t_color clight, double angle)
+t_color		calc_color(t_ray *ray, t_color cobj, t_color clight, double angle)
 {
 	t_color		color;
 	double		x;
