@@ -1,5 +1,5 @@
 camera
-t1,0,-100
+t1,0,-20
 spot
 t(3, 0, 10)
 spot
@@ -8,6 +8,9 @@ sphere
 o2
 t(1, 0, 0)
 c(1, 0, 0)
+sphere
+o3
+t(3, 4, -3)
 plane
 t(0, 0, 20)
 r(0, 90, 0)

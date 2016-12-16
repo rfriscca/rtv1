@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 12:17:11 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/12/16 15:15:24 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/12/16 15:44:59 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	create_sphere(t_env *env, t_vector pos, t_color color, double r)
 	obj->vec1 = pos;
 	obj->vec2 = pos;
 	obj->r = r;
-	obj->reflect = 0;
+	obj->reflect = 1;
 	obj->d1 = 0;
 	obj->d2 = 0;
 	obj->color = color;

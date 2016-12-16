@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 13:36:02 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/12/16 15:13:47 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/12/16 16:16:32 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,15 @@ t_vector	calc_reflect_vect(t_ray *ray, t_obj *obj, t_vector point)
 		norm = normalize_vec(calc_ncylinder(ray, obj));
 	else if (obj->type == 'k')
 		norm = normalize_vec(calc_ncone(ray, obj));
-	vdir_reflect = reflect_vect(ray->vecdir, norm);
+	vdir_reflect = normalize_vec(reflect_vect(ray->vecdir, norm));
 	return (vdir_reflect);
+}
+
+void		reflect_ray(t_ray *ray, t_obj *obj, t_vector point)
+{
+	ray->pos = point;
+	ray->vecdir = calc_reflect_vect(ray, obj, point);
+	ray->dist = 1000000;
 }
 
 t_color		trace(t_env *env, t_ray *ray, int i)
@@ -55,8 +62,7 @@ t_color		trace(t_env *env, t_ray *ray, int i)
 	point = calc_point(ray);
 	if (obj->reflect == 1)
 	{
-		VDIR = calc_reflect_vect(ray, obj, point);
-		ray->pos = point;
+		reflect_ray(ray, obj, point);
 		color = trace(env, ray, i + 1);
 		return (color);
 	}

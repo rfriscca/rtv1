@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/12/16 15:14:03 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/12/16 15:52:34 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define RA 255
 # define GA 255
 # define BA 255
-# define MAX_DEPTH 5
+# define MAX_DEPTH 25
 
 /*
 ** FOV = atan(VPWIDTH / 2 / VPDIST)
