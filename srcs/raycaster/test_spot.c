@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 15:15:57 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/12/15 15:07:01 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/12/16 14:45:01 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ int		lightcaster(t_env *env, t_vector pos, t_ray ray, t_obj *obj)
 	return (0);
 }
 
-t_ray	init_lightray(t_env *env, t_vector vec, t_vector point)
+t_ray	init_lightray(t_env *env, t_vector vecdir, t_vector point)
 {
 	t_vector	len;
 	t_ray		ray;
 
 	len = calc_vect(point, env->spot->spotpos);
-	ray.vecdir = vec;
+	ray.vecdir = vecdir;
 	ray.dist = sqrt(len.x * len.x + len.y * len.y + len.z * len.z);
 	return (ray);
 }

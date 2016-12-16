@@ -6,7 +6,7 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 13:26:09 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/12/15 14:53:08 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/12/16 15:14:03 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define EPS 0.01
 # define WIDTH 640
 # define HEIGHT 480
-# define VPWIDTH 10.0
+# define VPWIDTH 10
 # define VPHEIGHT 7.2
 # define VPDIST 20
 # define PI 3.14159265

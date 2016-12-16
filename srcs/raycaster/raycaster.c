@@ -6,11 +6,21 @@
 /*   By: rfriscca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:22:46 by rfriscca          #+#    #+#             */
-/*   Updated: 2016/12/15 15:20:05 by rfriscca         ###   ########.fr       */
+/*   Updated: 2016/12/16 15:14:24 by rfriscca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+t_color	init_color_black(void)
+{
+	t_color	color;
+
+	color.r = 0;
+	color.g = 0;
+	color.b = 0;
+	return (color);
+}
 
 t_ray	init_ray(t_env *env)
 {
@@ -30,17 +40,8 @@ t_ray	init_ray(t_env *env)
 	ray.vecdir.y = y / sqrt(x * x + y * y + z * z);
 	ray.vecdir.z = z / sqrt(x * x + y * y + z * z);
 	ray.dist = 1000000;
+	ray.color = init_color_black();
 	return (ray);
-}
-
-t_color	init_color_black(void)
-{
-	t_color	color;
-
-	color.r = 0;
-	color.g = 0;
-	color.b = 0;
-	return (color);
 }
 
 void	raycaster(t_env *env)
